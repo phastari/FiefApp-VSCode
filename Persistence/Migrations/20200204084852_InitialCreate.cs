@@ -253,96 +253,6 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Markets",
-                columns: table => new
-                {
-                    MarketId = table.Column<Guid>(nullable: false),
-                    AssignmentId = table.Column<Guid>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    DevelopmentLevel = table.Column<int>(nullable: false),
-                    Merchandise = table.Column<int>(nullable: false),
-                    IncomeSilver = table.Column<int>(nullable: false),
-                    IncomeBase = table.Column<int>(nullable: false),
-                    Taxes = table.Column<int>(nullable: false),
-                    Bailiffs = table.Column<int>(nullable: false),
-                    Crime = table.Column<int>(nullable: false),
-                    IsBeingDeveloped = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Markets", x => x.MarketId);
-                    table.ForeignKey(
-                        name: "FK_Markets_Assignments_AssignmentId",
-                        column: x => x.AssignmentId,
-                        principalTable: "Assignments",
-                        principalColumn: "AssignmentId",
-                        onDelete: ReferentialAction.SetNull);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Shipyards",
-                columns: table => new
-                {
-                    ShipyardId = table.Column<Guid>(nullable: false),
-                    AssignmentId = table.Column<Guid>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    DevelopmentLevel = table.Column<int>(nullable: false),
-                    IsBeingDeveloped = table.Column<bool>(nullable: false),
-                    IncomeSilver = table.Column<int>(nullable: false),
-                    SmallDocks = table.Column<int>(nullable: false),
-                    MediumDocks = table.Column<int>(nullable: false),
-                    LargeDocks = table.Column<int>(nullable: false),
-                    PopulationModifier = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Shipyards", x => x.ShipyardId);
-                    table.ForeignKey(
-                        name: "FK_Shipyards_Assignments_AssignmentId",
-                        column: x => x.AssignmentId,
-                        principalTable: "Assignments",
-                        principalColumn: "AssignmentId",
-                        onDelete: ReferentialAction.SetNull);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Inheritances",
-                columns: table => new
-                {
-                    InheritanceId = table.Column<Guid>(nullable: false),
-                    InheritanceTypeId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Inheritances", x => x.InheritanceId);
-                    table.ForeignKey(
-                        name: "FK_Inheritances_InheritanceTypes_InheritanceTypeId",
-                        column: x => x.InheritanceTypeId,
-                        principalTable: "InheritanceTypes",
-                        principalColumn: "InheritanceTypeId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Roads",
-                columns: table => new
-                {
-                    RoadId = table.Column<Guid>(nullable: false),
-                    RoadTypeId = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Roads", x => x.RoadId);
-                    table.ForeignKey(
-                        name: "FK_Roads_RoadTypes_RoadTypeId",
-                        column: x => x.RoadTypeId,
-                        principalTable: "RoadTypes",
-                        principalColumn: "RoadTypeId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "GameSessions",
                 columns: table => new
                 {
@@ -362,73 +272,12 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Boatbuilders",
-                columns: table => new
-                {
-                    BoatbuilderId = table.Column<Guid>(nullable: false),
-                    AssignmentId = table.Column<Guid>(nullable: true),
-                    ShipyardId = table.Column<Guid>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    Skill = table.Column<int>(nullable: false),
-                    Resources = table.Column<int>(nullable: false),
-                    Loyalty = table.Column<int>(nullable: false),
-                    Age = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Boatbuilders", x => x.BoatbuilderId);
-                    table.ForeignKey(
-                        name: "FK_Boatbuilders_Shipyards_ShipyardId",
-                        column: x => x.ShipyardId,
-                        principalTable: "Shipyards",
-                        principalColumn: "ShipyardId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Ports",
-                columns: table => new
-                {
-                    PortId = table.Column<Guid>(nullable: false),
-                    AssignmentId = table.Column<Guid>(nullable: true),
-                    ShipyardId = table.Column<Guid>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    DevelopmentLevel = table.Column<int>(nullable: false),
-                    Merchandise = table.Column<int>(nullable: false),
-                    IncomeSilver = table.Column<int>(nullable: false),
-                    Taxes = table.Column<int>(nullable: false),
-                    Bailiffs = table.Column<int>(nullable: false),
-                    Crime = table.Column<int>(nullable: false),
-                    IsBeingDeveloped = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Ports", x => x.PortId);
-                    table.ForeignKey(
-                        name: "FK_Ports_Assignments_AssignmentId",
-                        column: x => x.AssignmentId,
-                        principalTable: "Assignments",
-                        principalColumn: "AssignmentId",
-                        onDelete: ReferentialAction.SetNull);
-                    table.ForeignKey(
-                        name: "FK_Ports_Shipyards_ShipyardId",
-                        column: x => x.ShipyardId,
-                        principalTable: "Shipyards",
-                        principalColumn: "ShipyardId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Fiefs",
                 columns: table => new
                 {
                     FiefId = table.Column<Guid>(nullable: false),
                     GameSessionId = table.Column<Guid>(nullable: false),
-                    MarketId = table.Column<Guid>(nullable: false),
                     AssignmentId = table.Column<Guid>(nullable: true),
-                    PortId = table.Column<Guid>(nullable: true),
-                    RoadId = table.Column<Guid>(nullable: false),
-                    InheritanceId = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(maxLength: 60, nullable: true),
                     Acres = table.Column<int>(nullable: false),
                     FarmlandAcres = table.Column<int>(nullable: false),
@@ -466,145 +315,10 @@ namespace Persistence.Migrations
                         principalColumn: "GameSessionId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Fiefs_Inheritances_InheritanceId",
-                        column: x => x.InheritanceId,
-                        principalTable: "Inheritances",
-                        principalColumn: "InheritanceId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Fiefs_InheritanceTypes_InheritanceTypeId",
                         column: x => x.InheritanceTypeId,
                         principalTable: "InheritanceTypes",
                         principalColumn: "InheritanceTypeId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Fiefs_Markets_MarketId",
-                        column: x => x.MarketId,
-                        principalTable: "Markets",
-                        principalColumn: "MarketId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Fiefs_Ports_PortId",
-                        column: x => x.PortId,
-                        principalTable: "Ports",
-                        principalColumn: "PortId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Fiefs_Roads_RoadId",
-                        column: x => x.RoadId,
-                        principalTable: "Roads",
-                        principalColumn: "RoadId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Merchants",
-                columns: table => new
-                {
-                    MerchantId = table.Column<Guid>(nullable: false),
-                    CargoId = table.Column<Guid>(nullable: true),
-                    PortId = table.Column<Guid>(nullable: true),
-                    Status = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    Skill = table.Column<int>(nullable: false),
-                    Resources = table.Column<int>(nullable: false),
-                    Loyalty = table.Column<int>(nullable: false),
-                    Age = table.Column<int>(nullable: false),
-                    MarketId = table.Column<Guid>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Merchants", x => x.MerchantId);
-                    table.ForeignKey(
-                        name: "FK_Merchants_Cargos_CargoId",
-                        column: x => x.CargoId,
-                        principalTable: "Cargos",
-                        principalColumn: "CargoId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Merchants_Markets_MarketId",
-                        column: x => x.MarketId,
-                        principalTable: "Markets",
-                        principalColumn: "MarketId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Merchants_Ports_PortId",
-                        column: x => x.PortId,
-                        principalTable: "Ports",
-                        principalColumn: "PortId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Boats",
-                columns: table => new
-                {
-                    BoatId = table.Column<Guid>(nullable: false),
-                    BoatTypeId = table.Column<int>(nullable: false),
-                    BoatbuilderId = table.Column<Guid>(nullable: true),
-                    CargoId = table.Column<Guid>(nullable: true),
-                    ShipyardId = table.Column<Guid>(nullable: true),
-                    FiefId = table.Column<Guid>(nullable: true),
-                    Name = table.Column<string>(maxLength: 50, nullable: true),
-                    Length = table.Column<int>(nullable: false),
-                    Width = table.Column<decimal>(type: "decimal(15,5)", nullable: false),
-                    Depth = table.Column<decimal>(type: "decimal(15,5)", nullable: false),
-                    CrewNeeded = table.Column<int>(nullable: false),
-                    Seamens = table.Column<int>(nullable: false),
-                    Mariners = table.Column<int>(nullable: false),
-                    Rowers = table.Column<int>(nullable: false),
-                    RowersNeeded = table.Column<int>(nullable: false),
-                    MaxCargo = table.Column<int>(nullable: false),
-                    Sailors = table.Column<int>(nullable: false),
-                    Officers = table.Column<int>(nullable: false),
-                    Navigators = table.Column<int>(nullable: false),
-                    Amount = table.Column<int>(nullable: false),
-                    CostWhenFinishedSilver = table.Column<int>(nullable: false),
-                    NextFinishedDays = table.Column<int>(nullable: false),
-                    BuildTimeInDays = table.Column<int>(nullable: false),
-                    BuildTimeInDaysAll = table.Column<int>(nullable: false),
-                    Status = table.Column<string>(nullable: true),
-                    BackIn = table.Column<int>(nullable: false),
-                    PortId = table.Column<Guid>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Boats", x => x.BoatId);
-                    table.ForeignKey(
-                        name: "FK_Boats_BoatTypes_BoatTypeId",
-                        column: x => x.BoatTypeId,
-                        principalTable: "BoatTypes",
-                        principalColumn: "BoatTypeId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Boats_Boatbuilders_BoatbuilderId",
-                        column: x => x.BoatbuilderId,
-                        principalTable: "Boatbuilders",
-                        principalColumn: "BoatbuilderId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Boats_Cargos_CargoId",
-                        column: x => x.CargoId,
-                        principalTable: "Cargos",
-                        principalColumn: "CargoId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Boats_Fiefs_FiefId",
-                        column: x => x.FiefId,
-                        principalTable: "Fiefs",
-                        principalColumn: "FiefId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Boats_Ports_PortId",
-                        column: x => x.PortId,
-                        principalTable: "Ports",
-                        principalColumn: "PortId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Boats_Shipyards_ShipyardId",
-                        column: x => x.ShipyardId,
-                        principalTable: "Shipyards",
-                        principalColumn: "ShipyardId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -747,6 +461,31 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Inheritances",
+                columns: table => new
+                {
+                    InheritanceId = table.Column<Guid>(nullable: false),
+                    InheritanceTypeId = table.Column<int>(nullable: false),
+                    FiefId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Inheritances", x => x.InheritanceId);
+                    table.ForeignKey(
+                        name: "FK_Inheritances_Fiefs_FiefId",
+                        column: x => x.FiefId,
+                        principalTable: "Fiefs",
+                        principalColumn: "FiefId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Inheritances_InheritanceTypes_InheritanceTypeId",
+                        column: x => x.InheritanceTypeId,
+                        principalTable: "InheritanceTypes",
+                        principalColumn: "InheritanceTypeId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Livingconditions",
                 columns: table => new
                 {
@@ -772,6 +511,73 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Markets",
+                columns: table => new
+                {
+                    MarketId = table.Column<Guid>(nullable: false),
+                    AssignmentId = table.Column<Guid>(nullable: true),
+                    FiefId = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    DevelopmentLevel = table.Column<int>(nullable: false),
+                    Merchandise = table.Column<int>(nullable: false),
+                    IncomeSilver = table.Column<int>(nullable: false),
+                    IncomeBase = table.Column<int>(nullable: false),
+                    Taxes = table.Column<int>(nullable: false),
+                    Bailiffs = table.Column<int>(nullable: false),
+                    Crime = table.Column<int>(nullable: false),
+                    IsBeingDeveloped = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Markets", x => x.MarketId);
+                    table.ForeignKey(
+                        name: "FK_Markets_Assignments_AssignmentId",
+                        column: x => x.AssignmentId,
+                        principalTable: "Assignments",
+                        principalColumn: "AssignmentId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Markets_Fiefs_FiefId",
+                        column: x => x.FiefId,
+                        principalTable: "Fiefs",
+                        principalColumn: "FiefId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Ports",
+                columns: table => new
+                {
+                    PortId = table.Column<Guid>(nullable: false),
+                    FiefId = table.Column<Guid>(nullable: false),
+                    AssignmentId = table.Column<Guid>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    DevelopmentLevel = table.Column<int>(nullable: false),
+                    Merchandise = table.Column<int>(nullable: false),
+                    IncomeSilver = table.Column<int>(nullable: false),
+                    Taxes = table.Column<int>(nullable: false),
+                    Bailiffs = table.Column<int>(nullable: false),
+                    Crime = table.Column<int>(nullable: false),
+                    IsBeingDeveloped = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ports", x => x.PortId);
+                    table.ForeignKey(
+                        name: "FK_Ports_Assignments_AssignmentId",
+                        column: x => x.AssignmentId,
+                        principalTable: "Assignments",
+                        principalColumn: "AssignmentId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Ports_Fiefs_FiefId",
+                        column: x => x.FiefId,
+                        principalTable: "Fiefs",
+                        principalColumn: "FiefId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Residents",
                 columns: table => new
                 {
@@ -793,6 +599,32 @@ namespace Persistence.Migrations
                         principalTable: "Fiefs",
                         principalColumn: "FiefId",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Roads",
+                columns: table => new
+                {
+                    RoadId = table.Column<Guid>(nullable: false),
+                    FiefId = table.Column<Guid>(nullable: false),
+                    RoadTypeId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roads", x => x.RoadId);
+                    table.ForeignKey(
+                        name: "FK_Roads_Fiefs_FiefId",
+                        column: x => x.FiefId,
+                        principalTable: "Fiefs",
+                        principalColumn: "FiefId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Roads_RoadTypes_RoadTypeId",
+                        column: x => x.RoadTypeId,
+                        principalTable: "RoadTypes",
+                        principalColumn: "RoadTypeId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -899,6 +731,174 @@ namespace Persistence.Migrations
                         column: x => x.FiefId,
                         principalTable: "Fiefs",
                         principalColumn: "FiefId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Merchants",
+                columns: table => new
+                {
+                    MerchantId = table.Column<Guid>(nullable: false),
+                    CargoId = table.Column<Guid>(nullable: true),
+                    PortId = table.Column<Guid>(nullable: true),
+                    Status = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    Skill = table.Column<int>(nullable: false),
+                    Resources = table.Column<int>(nullable: false),
+                    Loyalty = table.Column<int>(nullable: false),
+                    Age = table.Column<int>(nullable: false),
+                    MarketId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Merchants", x => x.MerchantId);
+                    table.ForeignKey(
+                        name: "FK_Merchants_Cargos_CargoId",
+                        column: x => x.CargoId,
+                        principalTable: "Cargos",
+                        principalColumn: "CargoId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Merchants_Markets_MarketId",
+                        column: x => x.MarketId,
+                        principalTable: "Markets",
+                        principalColumn: "MarketId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Merchants_Ports_PortId",
+                        column: x => x.PortId,
+                        principalTable: "Ports",
+                        principalColumn: "PortId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Shipyards",
+                columns: table => new
+                {
+                    ShipyardId = table.Column<Guid>(nullable: false),
+                    AssignmentId = table.Column<Guid>(nullable: true),
+                    PortId = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    DevelopmentLevel = table.Column<int>(nullable: false),
+                    IsBeingDeveloped = table.Column<bool>(nullable: false),
+                    IncomeSilver = table.Column<int>(nullable: false),
+                    SmallDocks = table.Column<int>(nullable: false),
+                    MediumDocks = table.Column<int>(nullable: false),
+                    LargeDocks = table.Column<int>(nullable: false),
+                    PopulationModifier = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Shipyards", x => x.ShipyardId);
+                    table.ForeignKey(
+                        name: "FK_Shipyards_Assignments_AssignmentId",
+                        column: x => x.AssignmentId,
+                        principalTable: "Assignments",
+                        principalColumn: "AssignmentId",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Shipyards_Ports_PortId",
+                        column: x => x.PortId,
+                        principalTable: "Ports",
+                        principalColumn: "PortId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Boatbuilders",
+                columns: table => new
+                {
+                    BoatbuilderId = table.Column<Guid>(nullable: false),
+                    AssignmentId = table.Column<Guid>(nullable: true),
+                    ShipyardId = table.Column<Guid>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    Skill = table.Column<int>(nullable: false),
+                    Resources = table.Column<int>(nullable: false),
+                    Loyalty = table.Column<int>(nullable: false),
+                    Age = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Boatbuilders", x => x.BoatbuilderId);
+                    table.ForeignKey(
+                        name: "FK_Boatbuilders_Shipyards_ShipyardId",
+                        column: x => x.ShipyardId,
+                        principalTable: "Shipyards",
+                        principalColumn: "ShipyardId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Boats",
+                columns: table => new
+                {
+                    BoatId = table.Column<Guid>(nullable: false),
+                    BoatTypeId = table.Column<int>(nullable: false),
+                    BoatbuilderId = table.Column<Guid>(nullable: true),
+                    CargoId = table.Column<Guid>(nullable: true),
+                    ShipyardId = table.Column<Guid>(nullable: true),
+                    FiefId = table.Column<Guid>(nullable: true),
+                    Name = table.Column<string>(maxLength: 50, nullable: true),
+                    Length = table.Column<int>(nullable: false),
+                    Width = table.Column<decimal>(type: "decimal(15,5)", nullable: false),
+                    Depth = table.Column<decimal>(type: "decimal(15,5)", nullable: false),
+                    CrewNeeded = table.Column<int>(nullable: false),
+                    Seamens = table.Column<int>(nullable: false),
+                    Mariners = table.Column<int>(nullable: false),
+                    Rowers = table.Column<int>(nullable: false),
+                    RowersNeeded = table.Column<int>(nullable: false),
+                    MaxCargo = table.Column<int>(nullable: false),
+                    Sailors = table.Column<int>(nullable: false),
+                    Officers = table.Column<int>(nullable: false),
+                    Navigators = table.Column<int>(nullable: false),
+                    Amount = table.Column<int>(nullable: false),
+                    CostWhenFinishedSilver = table.Column<int>(nullable: false),
+                    NextFinishedDays = table.Column<int>(nullable: false),
+                    BuildTimeInDays = table.Column<int>(nullable: false),
+                    BuildTimeInDaysAll = table.Column<int>(nullable: false),
+                    Status = table.Column<string>(nullable: true),
+                    BackIn = table.Column<int>(nullable: false),
+                    PortId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Boats", x => x.BoatId);
+                    table.ForeignKey(
+                        name: "FK_Boats_BoatTypes_BoatTypeId",
+                        column: x => x.BoatTypeId,
+                        principalTable: "BoatTypes",
+                        principalColumn: "BoatTypeId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Boats_Boatbuilders_BoatbuilderId",
+                        column: x => x.BoatbuilderId,
+                        principalTable: "Boatbuilders",
+                        principalColumn: "BoatbuilderId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Boats_Cargos_CargoId",
+                        column: x => x.CargoId,
+                        principalTable: "Cargos",
+                        principalColumn: "CargoId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Boats_Fiefs_FiefId",
+                        column: x => x.FiefId,
+                        principalTable: "Fiefs",
+                        principalColumn: "FiefId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Boats_Ports_PortId",
+                        column: x => x.PortId,
+                        principalTable: "Ports",
+                        principalColumn: "PortId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Boats_Shipyards_ShipyardId",
+                        column: x => x.ShipyardId,
+                        principalTable: "Shipyards",
+                        principalColumn: "ShipyardId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -1258,34 +1258,9 @@ namespace Persistence.Migrations
                 column: "GameSessionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Fiefs_InheritanceId",
-                table: "Fiefs",
-                column: "InheritanceId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Fiefs_InheritanceTypeId",
                 table: "Fiefs",
                 column: "InheritanceTypeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Fiefs_MarketId",
-                table: "Fiefs",
-                column: "MarketId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Fiefs_PortId",
-                table: "Fiefs",
-                column: "PortId",
-                unique: true,
-                filter: "[PortId] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Fiefs_RoadId",
-                table: "Fiefs",
-                column: "RoadId",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_GameSessions_UserLinkId",
@@ -1320,6 +1295,12 @@ namespace Persistence.Migrations
                 column: "SubsidiaryTypeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Inheritances_FiefId",
+                table: "Inheritances",
+                column: "FiefId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Inheritances_InheritanceTypeId",
                 table: "Inheritances",
                 column: "InheritanceTypeId");
@@ -1341,6 +1322,12 @@ namespace Persistence.Migrations
                 column: "AssignmentId",
                 unique: true,
                 filter: "[AssignmentId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Markets_FiefId",
+                table: "Markets",
+                column: "FiefId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Merchants_CargoId",
@@ -1365,16 +1352,21 @@ namespace Persistence.Migrations
                 filter: "[AssignmentId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ports_ShipyardId",
+                name: "IX_Ports_FiefId",
                 table: "Ports",
-                column: "ShipyardId",
-                unique: true,
-                filter: "[ShipyardId] IS NOT NULL");
+                column: "FiefId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Residents_FiefId",
                 table: "Residents",
                 column: "FiefId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Roads_FiefId",
+                table: "Roads",
+                column: "FiefId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Roads_RoadTypeId",
@@ -1387,6 +1379,12 @@ namespace Persistence.Migrations
                 column: "AssignmentId",
                 unique: true,
                 filter: "[AssignmentId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Shipyards_PortId",
+                table: "Shipyards",
+                column: "PortId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Soldiers_BoatId",
@@ -1467,6 +1465,9 @@ namespace Persistence.Migrations
                 name: "Employees");
 
             migrationBuilder.DropTable(
+                name: "Inheritances");
+
+            migrationBuilder.DropTable(
                 name: "Livingconditions");
 
             migrationBuilder.DropTable(
@@ -1503,6 +1504,9 @@ namespace Persistence.Migrations
                 name: "Industries");
 
             migrationBuilder.DropTable(
+                name: "Roads");
+
+            migrationBuilder.DropTable(
                 name: "SoldierType");
 
             migrationBuilder.DropTable(
@@ -1515,7 +1519,7 @@ namespace Persistence.Migrations
                 name: "Cargos");
 
             migrationBuilder.DropTable(
-                name: "Fiefs");
+                name: "Markets");
 
             migrationBuilder.DropTable(
                 name: "MineType");
@@ -1527,34 +1531,28 @@ namespace Persistence.Migrations
                 name: "SubsidiaryType");
 
             migrationBuilder.DropTable(
-                name: "GameSessions");
-
-            migrationBuilder.DropTable(
-                name: "Inheritances");
-
-            migrationBuilder.DropTable(
-                name: "Markets");
-
-            migrationBuilder.DropTable(
-                name: "Ports");
-
-            migrationBuilder.DropTable(
-                name: "Roads");
-
-            migrationBuilder.DropTable(
-                name: "UserLinks");
-
-            migrationBuilder.DropTable(
-                name: "InheritanceTypes");
+                name: "RoadTypes");
 
             migrationBuilder.DropTable(
                 name: "Shipyards");
 
             migrationBuilder.DropTable(
-                name: "RoadTypes");
+                name: "Ports");
+
+            migrationBuilder.DropTable(
+                name: "Fiefs");
 
             migrationBuilder.DropTable(
                 name: "Assignments");
+
+            migrationBuilder.DropTable(
+                name: "GameSessions");
+
+            migrationBuilder.DropTable(
+                name: "InheritanceTypes");
+
+            migrationBuilder.DropTable(
+                name: "UserLinks");
         }
     }
 }

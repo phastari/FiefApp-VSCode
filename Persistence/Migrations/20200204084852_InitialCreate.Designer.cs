@@ -10,7 +10,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(FiefAppDbContext))]
-    [Migration("20200204081542_InitialCreate")]
+    [Migration("20200204084852_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -291,14 +291,8 @@ namespace Persistence.Migrations
                         .HasColumnType("int")
                         .HasDefaultValue(1);
 
-                    b.Property<Guid>("InheritanceId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int?>("InheritanceTypeId")
                         .HasColumnType("int");
-
-                    b.Property<Guid>("MarketId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("MilitaryDevelopmentLevel")
                         .ValueGeneratedOnAdd()
@@ -319,12 +313,6 @@ namespace Persistence.Migrations
 
                     b.Property<int>("PastureAcres")
                         .HasColumnType("int");
-
-                    b.Property<Guid?>("PortId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("RoadId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("SeafaringDevelopmentLevel")
                         .HasColumnType("int");
@@ -348,20 +336,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("GameSessionId");
 
-                    b.HasIndex("InheritanceId")
-                        .IsUnique();
-
                     b.HasIndex("InheritanceTypeId");
-
-                    b.HasIndex("MarketId")
-                        .IsUnique();
-
-                    b.HasIndex("PortId")
-                        .IsUnique()
-                        .HasFilter("[PortId] IS NOT NULL");
-
-                    b.HasIndex("RoadId")
-                        .IsUnique();
 
                     b.ToTable("Fiefs");
                 });
@@ -423,10 +398,16 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("FiefId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("InheritanceTypeId")
                         .HasColumnType("int");
 
                     b.HasKey("InheritanceId");
+
+                    b.HasIndex("FiefId")
+                        .IsUnique();
 
                     b.HasIndex("InheritanceTypeId");
 
@@ -473,6 +454,9 @@ namespace Persistence.Migrations
                     b.Property<int>("DevelopmentLevel")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("FiefId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("IncomeBase")
                         .HasColumnType("int");
 
@@ -496,6 +480,9 @@ namespace Persistence.Migrations
                     b.HasIndex("AssignmentId")
                         .IsUnique()
                         .HasFilter("[AssignmentId] IS NOT NULL");
+
+                    b.HasIndex("FiefId")
+                        .IsUnique();
 
                     b.ToTable("Markets");
                 });
@@ -825,6 +812,9 @@ namespace Persistence.Migrations
                     b.Property<int>("DevelopmentLevel")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("FiefId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("IncomeSilver")
                         .HasColumnType("int");
 
@@ -837,9 +827,6 @@ namespace Persistence.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("ShipyardId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("Taxes")
                         .HasColumnType("int");
 
@@ -849,9 +836,8 @@ namespace Persistence.Migrations
                         .IsUnique()
                         .HasFilter("[AssignmentId] IS NOT NULL");
 
-                    b.HasIndex("ShipyardId")
-                        .IsUnique()
-                        .HasFilter("[ShipyardId] IS NOT NULL");
+                    b.HasIndex("FiefId")
+                        .IsUnique();
 
                     b.ToTable("Ports");
                 });
@@ -862,6 +848,9 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("FiefId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -869,6 +858,9 @@ namespace Persistence.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("RoadId");
+
+                    b.HasIndex("FiefId")
+                        .IsUnique();
 
                     b.HasIndex("RoadTypeId");
 
@@ -905,6 +897,9 @@ namespace Persistence.Migrations
                     b.Property<int>("PopulationModifier")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("PortId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("SmallDocks")
                         .HasColumnType("int");
 
@@ -913,6 +908,9 @@ namespace Persistence.Migrations
                     b.HasIndex("AssignmentId")
                         .IsUnique()
                         .HasFilter("[AssignmentId] IS NOT NULL");
+
+                    b.HasIndex("PortId")
+                        .IsUnique();
 
                     b.ToTable("Shipyards");
                 });
@@ -2971,32 +2969,9 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.Inheritance", "Inheritance")
-                        .WithOne("Fief")
-                        .HasForeignKey("Domain.Entities.Fief", "InheritanceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Domain.Entities.Types.InheritanceType", null)
                         .WithMany("Fiefs")
                         .HasForeignKey("InheritanceTypeId");
-
-                    b.HasOne("Domain.Entities.Market", "Market")
-                        .WithOne("Fief")
-                        .HasForeignKey("Domain.Entities.Fief", "MarketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Port", "Port")
-                        .WithOne("Fief")
-                        .HasForeignKey("Domain.Entities.Fief", "PortId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Domain.Entities.Road", "Road")
-                        .WithOne("Fief")
-                        .HasForeignKey("Domain.Entities.Fief", "RoadId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Entities.GameSession", b =>
@@ -3022,6 +2997,12 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Inheritance", b =>
                 {
+                    b.HasOne("Domain.Entities.Fief", "Fief")
+                        .WithOne("Inheritance")
+                        .HasForeignKey("Domain.Entities.Inheritance", "FiefId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Entities.Types.InheritanceType", "InheritanceType")
                         .WithMany()
                         .HasForeignKey("InheritanceTypeId")
@@ -3048,6 +3029,12 @@ namespace Persistence.Migrations
                         .WithOne("Market")
                         .HasForeignKey("Domain.Entities.Market", "AssignmentId")
                         .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("Domain.Entities.Fief", "Fief")
+                        .WithOne("Market")
+                        .HasForeignKey("Domain.Entities.Market", "FiefId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Entities.Persons.Boatbuilder", b =>
@@ -3162,13 +3149,21 @@ namespace Persistence.Migrations
                         .HasForeignKey("Domain.Entities.Port", "AssignmentId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("Domain.Entities.Shipyard", "Shipyard")
+                    b.HasOne("Domain.Entities.Fief", "Fief")
                         .WithOne("Port")
-                        .HasForeignKey("Domain.Entities.Port", "ShipyardId");
+                        .HasForeignKey("Domain.Entities.Port", "FiefId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Entities.Road", b =>
                 {
+                    b.HasOne("Domain.Entities.Fief", "Fief")
+                        .WithOne("Road")
+                        .HasForeignKey("Domain.Entities.Road", "FiefId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Entities.Types.RoadType", "RoadType")
                         .WithMany("Roads")
                         .HasForeignKey("RoadTypeId")
@@ -3182,6 +3177,12 @@ namespace Persistence.Migrations
                         .WithOne("Shipyard")
                         .HasForeignKey("Domain.Entities.Shipyard", "AssignmentId")
                         .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("Domain.Entities.Port", "Port")
+                        .WithOne("Shipyard")
+                        .HasForeignKey("Domain.Entities.Shipyard", "PortId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Entities.Village", b =>
