@@ -9,9 +9,9 @@ namespace Persistence.Configuration
         public void Configure(EntityTypeBuilder<Port> builder)
         {
             builder
-                .HasOne(p => p.Shipyard)
+                .HasOne(p => p.Fief)
                 .WithOne(b => b.Port)
-                .HasForeignKey<Port>(c => c.ShipyardId);
+                .HasForeignKey<Port>(c => c.FiefId);
 
             builder
                 .HasOne(p => p.Assignment)

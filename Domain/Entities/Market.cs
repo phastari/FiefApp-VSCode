@@ -19,6 +19,7 @@ namespace Domain.Entities
         #nullable disable
         public ICollection<Merchant> Merchants { get; set; }
         public virtual Fief Fief { get; set; }
+        public Guid FiefId {get; set;}
         public ICollection<Soldier> Soldiers { get; set; }
         public string Name { get; set; }
         public int DevelopmentLevel { get; set; }

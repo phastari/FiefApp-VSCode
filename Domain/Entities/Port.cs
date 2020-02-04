@@ -15,11 +15,11 @@ namespace Domain.Entities
 
         public Guid PortId { get; set; }
         public Fief Fief { get; set; }
+        public Guid FiefId { get; set; }
 #nullable enable
         public Assignment? Assignment { get; set; }
         public Guid? AssignmentId { get; set; }
         public Shipyard? Shipyard { get; set; }
-        public Guid? ShipyardId { get; set; }
 #nullable disable
         public ICollection<Boat> Boats { get; set; }
         public ICollection<Merchant> Merchants { get; set; }

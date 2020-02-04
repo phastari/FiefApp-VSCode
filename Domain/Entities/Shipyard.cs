@@ -18,6 +18,7 @@ namespace Domain.Entities
         public Guid? AssignmentId { get; set; }
         #nullable disable
         public Port Port { get; set; }
+        public Guid PortId { get; set; }
         public ICollection<Boatbuilder> Boatbuilders { get; set; }
         public ICollection<Boat> Boats { get; set; }
         public string Name { get; set; }

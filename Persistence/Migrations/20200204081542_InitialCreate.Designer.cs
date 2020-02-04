@@ -10,7 +10,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(FiefAppDbContext))]
-    [Migration("20200203194222_InitialCreate")]
+    [Migration("20200204081542_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -297,9 +297,6 @@ namespace Persistence.Migrations
                     b.Property<int?>("InheritanceTypeId")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("LivingconditionId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("MarketId")
                         .HasColumnType("uniqueidentifier");
 
@@ -355,9 +352,6 @@ namespace Persistence.Migrations
                         .IsUnique();
 
                     b.HasIndex("InheritanceTypeId");
-
-                    b.HasIndex("LivingconditionId")
-                        .IsUnique();
 
                     b.HasIndex("MarketId")
                         .IsUnique();
@@ -445,10 +439,16 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("LivingconditionTypeId")
+                    b.Property<Guid>("FiefId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("LivingconditionTypeId")
                         .HasColumnType("int");
 
                     b.HasKey("LivingconditionId");
+
+                    b.HasIndex("FiefId")
+                        .IsUnique();
 
                     b.HasIndex("LivingconditionTypeId");
 
@@ -2981,12 +2981,6 @@ namespace Persistence.Migrations
                         .WithMany("Fiefs")
                         .HasForeignKey("InheritanceTypeId");
 
-                    b.HasOne("Domain.Entities.Livingcondition", "Livingcondition")
-                        .WithOne("Fief")
-                        .HasForeignKey("Domain.Entities.Fief", "LivingconditionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Domain.Entities.Market", "Market")
                         .WithOne("Fief")
                         .HasForeignKey("Domain.Entities.Fief", "MarketId")
@@ -2995,7 +2989,8 @@ namespace Persistence.Migrations
 
                     b.HasOne("Domain.Entities.Port", "Port")
                         .WithOne("Fief")
-                        .HasForeignKey("Domain.Entities.Fief", "PortId");
+                        .HasForeignKey("Domain.Entities.Fief", "PortId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Domain.Entities.Road", "Road")
                         .WithOne("Fief")
@@ -3036,11 +3031,15 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Livingcondition", b =>
                 {
-                    b.HasOne("Domain.Entities.Types.LivingconditionType", "LivingconditionType")
-                        .WithMany("Livingconditions")
-                        .HasForeignKey("LivingconditionTypeId")
+                    b.HasOne("Domain.Entities.Fief", "Fief")
+                        .WithOne("Livingcondition")
+                        .HasForeignKey("Domain.Entities.Livingcondition", "FiefId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Domain.Entities.Types.LivingconditionType", "LivingconditionType")
+                        .WithMany("Livingconditions")
+                        .HasForeignKey("LivingconditionTypeId");
                 });
 
             modelBuilder.Entity("Domain.Entities.Market", b =>

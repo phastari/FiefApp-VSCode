@@ -26,20 +26,16 @@ namespace Domain.Entities
 
         public Guid FiefId { get; set; }
         public virtual GameSession GameSession { get; set; }
-        public Guid GameSessionId { get; set; }        public Market Market { get; set; }
-        public Guid MarketId { get; set; }
+        public Guid GameSessionId { get; set; }
+        public Market Market { get; set; }
     #nullable enable
         public Assignment? Assignment { get; set; }
         public Guid? AssignmentId { get; set; }
         public Port? Port { get; set; }
-        public Guid? PortId { get; set; }
     #nullable disable
         public Livingcondition Livingcondition { get; set; }
-        public Guid LivingconditionId { get; set; }
         public Road Road { get; set; }
-        public Guid RoadId { get; set; }
         public Inheritance Inheritance { get; set; }
-        public Guid InheritanceId { get; set; }
         public virtual ICollection<Village> Villages { get; set; }
         public virtual ICollection<Industry> Industries { get; set; }
         public virtual ICollection<Building> Buildings { get; set; }

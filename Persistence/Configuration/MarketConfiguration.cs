@@ -13,6 +13,11 @@ namespace Persistence.Configuration
                 .WithOne(p => p.Market)
                 .HasForeignKey<Market>(p => p.AssignmentId)
                 .OnDelete(DeleteBehavior.SetNull);
+
+            builder
+                .HasOne(m => m.Fief)
+                .WithOne(f => f.Market)
+                .HasForeignKey<Market>(m => m.FiefId);
         }
     }
 }

@@ -324,24 +324,6 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Livingconditions",
-                columns: table => new
-                {
-                    LivingconditionId = table.Column<Guid>(nullable: false),
-                    LivingconditionTypeId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Livingconditions", x => x.LivingconditionId);
-                    table.ForeignKey(
-                        name: "FK_Livingconditions_LivingconditionTypes_LivingconditionTypeId",
-                        column: x => x.LivingconditionTypeId,
-                        principalTable: "LivingconditionTypes",
-                        principalColumn: "LivingconditionTypeId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Roads",
                 columns: table => new
                 {
@@ -445,7 +427,6 @@ namespace Persistence.Migrations
                     MarketId = table.Column<Guid>(nullable: false),
                     AssignmentId = table.Column<Guid>(nullable: true),
                     PortId = table.Column<Guid>(nullable: true),
-                    LivingconditionId = table.Column<Guid>(nullable: false),
                     RoadId = table.Column<Guid>(nullable: false),
                     InheritanceId = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(maxLength: 60, nullable: true),
@@ -497,12 +478,6 @@ namespace Persistence.Migrations
                         principalColumn: "InheritanceTypeId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Fiefs_Livingconditions_LivingconditionId",
-                        column: x => x.LivingconditionId,
-                        principalTable: "Livingconditions",
-                        principalColumn: "LivingconditionId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Fiefs_Markets_MarketId",
                         column: x => x.MarketId,
                         principalTable: "Markets",
@@ -513,7 +488,7 @@ namespace Persistence.Migrations
                         column: x => x.PortId,
                         principalTable: "Ports",
                         principalColumn: "PortId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Fiefs_Roads_RoadId",
                         column: x => x.RoadId,
@@ -769,6 +744,31 @@ namespace Persistence.Migrations
                         principalTable: "SubsidiaryType",
                         principalColumn: "SubsidiaryTypeId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Livingconditions",
+                columns: table => new
+                {
+                    LivingconditionId = table.Column<Guid>(nullable: false),
+                    LivingconditionTypeId = table.Column<int>(nullable: true),
+                    FiefId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Livingconditions", x => x.LivingconditionId);
+                    table.ForeignKey(
+                        name: "FK_Livingconditions_Fiefs_FiefId",
+                        column: x => x.FiefId,
+                        principalTable: "Fiefs",
+                        principalColumn: "FiefId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Livingconditions_LivingconditionTypes_LivingconditionTypeId",
+                        column: x => x.LivingconditionTypeId,
+                        principalTable: "LivingconditionTypes",
+                        principalColumn: "LivingconditionTypeId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -1269,12 +1269,6 @@ namespace Persistence.Migrations
                 column: "InheritanceTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Fiefs_LivingconditionId",
-                table: "Fiefs",
-                column: "LivingconditionId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Fiefs_MarketId",
                 table: "Fiefs",
                 column: "MarketId",
@@ -1329,6 +1323,12 @@ namespace Persistence.Migrations
                 name: "IX_Inheritances_InheritanceTypeId",
                 table: "Inheritances",
                 column: "InheritanceTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Livingconditions_FiefId",
+                table: "Livingconditions",
+                column: "FiefId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Livingconditions_LivingconditionTypeId",
@@ -1467,6 +1467,9 @@ namespace Persistence.Migrations
                 name: "Employees");
 
             migrationBuilder.DropTable(
+                name: "Livingconditions");
+
+            migrationBuilder.DropTable(
                 name: "Residents");
 
             migrationBuilder.DropTable(
@@ -1486,6 +1489,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "EmployeeTypes");
+
+            migrationBuilder.DropTable(
+                name: "LivingconditionTypes");
 
             migrationBuilder.DropTable(
                 name: "Boats");
@@ -1527,9 +1533,6 @@ namespace Persistence.Migrations
                 name: "Inheritances");
 
             migrationBuilder.DropTable(
-                name: "Livingconditions");
-
-            migrationBuilder.DropTable(
                 name: "Markets");
 
             migrationBuilder.DropTable(
@@ -1543,9 +1546,6 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "InheritanceTypes");
-
-            migrationBuilder.DropTable(
-                name: "LivingconditionTypes");
 
             migrationBuilder.DropTable(
                 name: "Shipyards");

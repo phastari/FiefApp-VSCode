@@ -29,35 +29,6 @@ namespace Persistence.Configuration
                 .IsRequired();
 
             builder
-                .HasOne(p => p.Market)
-                .WithOne(b => b.Fief)
-                .HasForeignKey<Fief>(c => c.MarketId)
-                .IsRequired();
-
-            builder
-                .HasOne(p => p.Port)
-                .WithOne(d => d.Fief)
-                .HasForeignKey<Fief>(c => c.PortId);
-
-            builder
-                .HasOne(p => p.Livingcondition)
-                .WithOne(c => c.Fief)
-                .HasForeignKey<Fief>(c => c.LivingconditionId)
-                .IsRequired();
-
-            builder
-                .HasOne(p => p.Road)
-                .WithOne(c => c.Fief)
-                .HasForeignKey<Fief>(c => c.RoadId)
-                .IsRequired();
-
-            builder
-                .HasOne(p => p.Inheritance)
-                .WithOne(c => c.Fief)
-                .HasForeignKey<Fief>(c => c.InheritanceId)
-                .IsRequired();
-
-            builder
                 .HasOne(p => p.Assignment)
                 .WithOne(p => p.Fief)
                 .HasForeignKey<Fief>(p => p.AssignmentId)

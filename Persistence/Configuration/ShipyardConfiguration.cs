@@ -13,6 +13,11 @@ namespace Persistence.Configuration
                 .WithOne(p => p.Shipyard)
                 .HasForeignKey<Shipyard>(p => p.AssignmentId)
                 .OnDelete(DeleteBehavior.SetNull);
+
+            builder
+                .HasOne(f => f.Port)
+                .WithOne(o => o.Shipyard)
+                .HasForeignKey<Shipyard>(f => f.PortId);
         }
     }
 }
