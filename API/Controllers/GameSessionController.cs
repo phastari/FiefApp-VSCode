@@ -5,6 +5,7 @@ using Application.GameSessions.Commands.DeleteGameSession;
 using Application.GameSessions.Commands.UpdateGameSession;
 using Application.GameSessions.Queries.GetGameSessionsList;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace API.Controllers
 {
@@ -39,7 +40,7 @@ namespace API.Controllers
         {
             var result = await Mediator.Send(new GetGameSessionsListQuery());
 
-            return Ok(result.GameSessions);
+            return Ok(result);
         }
     }
 }
