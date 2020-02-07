@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Row, Col, Button } from 'reactstrap';
-import { ISteward } from '../../../../common/types/steward';
+import { ISteward } from '../types';
 
 const Steward: React.FC<ISteward> = (props) => {
     return (

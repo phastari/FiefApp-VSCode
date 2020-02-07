@@ -6,6 +6,7 @@ import { getCurrentUser } from '../services/useAuthenticationService/actions';
 import { Router } from '@reach/router';
 import Home from '../components/home/Home';
 import TopNavBar from '../components/topNavBar/TopNavBar';
+import { AuthenticationActionTypes } from '../services/useAuthenticationService/types';
 
 const App = () => {
   const {
@@ -21,7 +22,7 @@ const App = () => {
         try {
           const payload = await getCurrentUser();
           if (!ignore) {
-            dispatch({ type: 'LOGIN_SUCCESS', username: payload.data.username, token: payload.data.token });
+            dispatch({ type: AuthenticationActionTypes.AUTHENTICATION_LOGIN_SUCCESS, username: payload.data.username, token: payload.data.token });
           }
         } catch (error) {
           console.log(error);

@@ -3,6 +3,7 @@ import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { RouteComponentProps } from '@reach/router';
 import useAuthenticationService from '../../services/useAuthenticationService/useAuthenticationService';
 import { login } from '../../services/useAuthenticationService/actions';
+import { AuthenticationActionTypes, IAuthenticationUser } from '../../services/useAuthenticationService/types';
 
 type AllProps = RouteComponentProps & { closeCallback: any };
 
@@ -11,7 +12,6 @@ const Login: React.FC<AllProps> = (props) => {
     const [password, setPassword] = useState('');
     const [authenticating, setAuthenticating] = useState(false);
     const {
-        state: { username, token },
         dispatch
     } = useAuthenticationService();
 
@@ -22,14 +22,14 @@ const Login: React.FC<AllProps> = (props) => {
 
         if (!authenticating) {
             try {
-                const user = await login(inputUsername, password);
-                dispatch({ type: 'LOGIN_SUCCESS', username: user.username, token: user.token });
+                let user: IAuthenticationUser = { username: inputUsername, password: password };
+                const response = await login(user);
+                dispatch({ type: AuthenticationActionTypes.AUTHENTICATION_LOGIN_SUCCESS, username: response.username, token: response.token });
                 setAuthenticating(false);
                 props.closeCallback();
             } catch (error) {
-                console.log(error);
                 setAuthenticating(false);
-                dispatch({ type: 'LOGIN_FAILURE'});
+                dispatch({ type: AuthenticationActionTypes.AUTHENTICATION_LOGIN_FAILURE, errors: error});
             }
         }
     };

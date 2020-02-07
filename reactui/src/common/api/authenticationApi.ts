@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const TOKEN_KEY = 'token';
 
-axios.defaults.baseURL = 'https://conduit.productionready.io/api';
+axios.defaults.baseURL = 'http://localhost:5000/api';
 axios.interceptors.response.use(
   (response) => {
     return response;

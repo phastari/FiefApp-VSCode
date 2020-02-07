@@ -30,3 +30,16 @@ export function isTokenValid(token: string) {
     }
 }
 
+export const getUsernameFromToken = (token: string) => {
+  try {
+    const decoded_jwt: JWTPayload = jwtDecode(token);
+    const current_time = Date.now().valueOf() / 1000;
+    if (decoded_jwt.exp > current_time) {
+      return decoded_jwt.username;
+    } else {
+      return null;
+    }
+  } catch (error) {
+      return null;
+  }
+}

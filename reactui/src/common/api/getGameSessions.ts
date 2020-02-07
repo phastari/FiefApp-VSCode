@@ -1,16 +1,15 @@
-import { apiClient } from "./apiClient"
 import { IGameSessions } from "../../services/useGameSessionsService/types"
 import { AxiosError } from "axios";
-import { ServerError } from "../types/servererror";
+import axios from "./authenticationApi";
 
 
 export const getGameSessions = async () => {
     try {
-        const response = await apiClient.get<IGameSessions>('/gamesession/getgamesessions');
+        const response = await axios.get<IGameSessions>('/gamesession/getgamesessions');
         return response.data;
     } catch (err) {
         if (err && err.response) {
-            const axiosError = err as AxiosError<ServerError>
+            const axiosError = err as AxiosError
             return axiosError.response?.data;
         }
 

@@ -1,9 +1,10 @@
 import React, { Fragment, useState } from 'react';
 import { RouteComponentProps, Link } from '@reach/router';
 import useAuthenticationService from '../../services/useAuthenticationService/useAuthenticationService';
-import { Navbar, Nav, NavItem, NavLink, Dropdown, DropdownToggle, DropdownMenu } from 'reactstrap';
+import { Navbar, Nav, NavItem, Dropdown, DropdownToggle, DropdownMenu, Button } from 'reactstrap';
 import '../../index.css';
 import Login from '../login/Login';
+import { logout } from '../../services/useAuthenticationService/actions';
 
 type Username = {
     name: string | null;
@@ -29,13 +30,13 @@ const LoggedInView: React.FC<Username> = ({ name }) => (
     <Fragment>
         <Nav navbar className='mr-auto'>
             <NavItem>
-                <NavLink to='/gamesessions'>Förlänings hanteraren</NavLink>
+                <Link to='/gamesessions' className='navbar-brand'>Förlänings hanteraren</Link>
             </NavItem>
         </Nav>
         <Nav navbar className='ml-auto'>
             {name}&nbsp;
             <NavItem>
-                <NavLink to='/logout'>Logga ut</NavLink>
+                <Button onClick={() => logout()}>Logga ut</Button>
             </NavItem>
         </Nav>
     </Fragment>

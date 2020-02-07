@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import { ISteward } from '../../../../common/types/steward';
 import Steward from '../steward/Steward';
+import { ISteward } from '../types';
 
 const GameSessions: React.FC = () => {
     let stewards = [

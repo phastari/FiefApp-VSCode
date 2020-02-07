@@ -1,9 +1,10 @@
 import React, { Dispatch, createContext, PropsWithChildren } from 'react';
 import { AuthenticationState, initialAuthenticationState } from './states';
-import { AuthenticationAction, logout } from './actions';
+import { AuthenticationAction, AuthenticationActionTypes } from './types';
 import { authenticationReducer } from './reducers';
-import { getLocalStorageValue, isTokenValid } from '../../common/jwt/jwtToken';
+import { getLocalStorageValue, isTokenValid, getUsernameFromToken } from '../../common/jwt/jwtToken';
 import { setToken, TOKEN_KEY } from '../../common/api/authenticationApi';
+import { logout } from './actions';
 
 type AuthenticationContextProps = {
     state: AuthenticationState;
@@ -24,9 +25,10 @@ export const AuthenticationProvider: React.FC<PropsWithChildren<{}>> = (props) =
 
     if (isTokenValid(token)) {
       setToken(token);
-      dispatch({ type: 'LOGIN_SUCCESS', token: token, username: token.username });
+      let username = getUsernameFromToken(token) as string;
+      dispatch({ type: AuthenticationActionTypes.AUTHENTICATION_LOGIN_SUCCESS, token: token, username: username });
     } else {
-      dispatch({ type: 'LOGIN_FAILURE' });
+      dispatch({ type: AuthenticationActionTypes.AUTHENTICATION_LOGIN_FAILURE, errors: 'Invalid token!' });
       logout();
     }
   }, []);
