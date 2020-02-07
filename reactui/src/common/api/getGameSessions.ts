@@ -1,5 +1,5 @@
 import { apiClient } from "./apiClient"
-import { IGameSessions } from "../types/gamesession"
+import { IGameSessions } from "../../services/useGameSessionsService/types"
 import { AxiosError } from "axios";
 import { ServerError } from "../types/servererror";
 

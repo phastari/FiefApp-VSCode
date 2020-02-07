@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Row, Col, Button } from 'reactstrap';
-import { IGameSession } from '../../../common/types/gamesession';
+import { IGameSession } from '../../../services/useGameSessionsService/types';
 
 const GameSession: React.FC<IGameSession> = (props) => {
     return (

@@ -1,8 +1,5 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -10,4 +7,45 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.vinque {
+  font-family: 'Vinque';
+}
+
+.goudyoldstyle {
+  font-family: 'Goudy Old Style';
+}
+
+.goudyoldstylebold {
+  font-family: 'Goudy Old Style';
+  font-weight: bold;
+}
+
+.goudyoldstyleitalic {
+  font-family: 'Goudy Old Style';
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Vinque;
+  src: url('./common/fonts/vinque.ttf');
+}
+
+@font-face {
+  font-family: 'Goudy Old Style';
+  src: url(./common/fonts/Goudy\ Old\ Style\ Italic.ttf) format('truetype');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Goudy Old Style';
+  src: url(./common/fonts/Goudy\ Old\ Style\ Bold.ttf) format('truetype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Goudy Old Style';
+  src: url(./common/fonts/Goudy\ Old\ Style\ Regular.ttf) format('truetype');
+  font-weight: normal;
 }

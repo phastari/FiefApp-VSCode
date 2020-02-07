@@ -1,14 +1,14 @@
 import React, { Fragment } from 'react';
-import useGameSessionsService from '../../../common/services/useGameSessionsService/useGameSessionsService';
+import useGameSessionsService from '../../../services/useGameSessionsService/useGameSessionsService';
+import Loading from '../../loading/Loading';
+import { RouteComponentProps } from '@reach/router';
 
-
-
-const GameSessions: React.FC = () => {
+const GameSessions: React.FC<RouteComponentProps> = (_: RouteComponentProps) => {
     const service = useGameSessionsService();
     
     return (
         <Fragment>
-            {service.status === 'loading' && <div>Loading...</div>}
+            {service.status === 'loading' && <Loading />}
 
             {service.status === 'error' && (
                 <div>Error!</div>
