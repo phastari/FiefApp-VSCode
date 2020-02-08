@@ -20,25 +20,43 @@ namespace Infrastructure.JwToken
 
         public string CreateToken(IApplicationUser user)
         {
+            var handler = new JwtSecurityTokenHandler();
+            var now = DateTime.UtcNow;
+
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.NameId, user.UserName)
             };
 
-            // generate signing credentials
-            var credentials = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
-            var tokenDescriptor = new SecurityTokenDescriptor
+            var descriptor = new SecurityTokenDescriptor
             {
+                Issuer = "me",
+                Audience = "you",
+                IssuedAt = now,
+                NotBefore = now,
+                Expires = now.AddMinutes(10),
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(7),
-                SigningCredentials = credentials
+                SigningCredentials = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature)
             };
 
-            var tokenHandler = new JwtSecurityTokenHandler();
+            return handler.CreateEncodedJwt(descriptor);
+        }
 
-            var token = tokenHandler.CreateToken(tokenDescriptor);
+        public SecurityToken DecryptToken(string token)
+        {
+            var handler = new JwtSecurityTokenHandler();
+            var result = handler.ValidateToken(token,
+            new TokenValidationParameters
+            {
+                ValidIssuer = "me",
+                ValidAudience = "you",
+                IssuerSigningKey = _key,
+                RequireExpirationTime = true
+            },
+            out SecurityToken securityToken
+        );
 
-            return tokenHandler.WriteToken(token);
+            return securityToken;
         }
     }
 }

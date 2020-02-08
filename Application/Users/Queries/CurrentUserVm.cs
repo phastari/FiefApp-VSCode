@@ -4,6 +4,8 @@ namespace Application.Users.Queries
     {
         public string Username { get; set; }
         public string Token { get; set; }
-        public string Error { get; set; }
+        #nullable enable
+        public string? Error { get; set; }
+        #nullable disable
     }
 }

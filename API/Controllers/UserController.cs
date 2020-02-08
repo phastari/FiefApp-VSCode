@@ -5,6 +5,7 @@ using Application.Users.Commands.DeleteUser;
 using Application.Users.Commands.UpdateUser;
 using Application.Users.Queries.CurrentUser;
 using Application.Users.Queries.LoginUser;
+using Application.Users.Queries.ValidateToken;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,7 +31,6 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> CurrentUser()
         {
             var vm = await Mediator.Send(new CurrentUserQuery());
@@ -39,7 +39,6 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginUserQuery query)
         {
             var vm = await Mediator.Send(query);
@@ -54,6 +53,14 @@ namespace API.Controllers
             var result = await Mediator.Send(command);
 
             return Ok(result);
+        }
+
+        [HttpGet("{token}")]
+        public async Task<IActionResult> ValidateToken(string token)
+        {
+            var response = await Mediator.Send(new ValidateTokenQuery { Token = token});
+
+            return Ok(response);
         }
     }
 }
