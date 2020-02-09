@@ -16,7 +16,6 @@ namespace Persistence
 
         }
 
-        public DbSet<UserLink> UserLinks { get; set; }
         public DbSet<GameSession> GameSessions { get; set; }
         public DbSet<Fief> Fiefs { get; set; }
         public DbSet<Road> Roads { get; set; }

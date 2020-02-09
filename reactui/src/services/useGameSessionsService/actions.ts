@@ -1,6 +1,6 @@
 import { IGameSessions } from "../../services/useGameSessionsService/types"
 import { AxiosError } from "axios";
-import axios from "./authenticationApi";
+import axios from "../../common/api/apiClient";
 
 
 export const getGameSessions = async () => {

@@ -4,6 +4,10 @@ namespace Domain.Entities.Industries
 {
     public class Felling : Industry
     {
+        public Felling()
+        {
+            IndustryType = "Felling";
+        }
         public int AmountLandclearing { get; set; }
         public int AmountLandclearingOfFelling { get; set; }
         public int AmountFelling { get; set; }

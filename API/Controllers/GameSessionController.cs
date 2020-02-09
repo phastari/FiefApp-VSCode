@@ -14,9 +14,9 @@ namespace API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create()
         {
-            var id = await Mediator.Send(new CreateGameSessionCommand());
+            var session = await Mediator.Send(new CreateGameSessionCommand());
 
-            return Ok(new { res = id });
+            return Ok(session);
         }
 
         [HttpPost]

@@ -5,6 +5,10 @@ namespace Domain.Entities.Industries
 {
     public class Subsidiary : Industry
     {
+        public Subsidiary()
+        {
+            IndustryType = "Subsidiary";
+        }
         public SubsidiaryType SubsidiaryType { get; set; }
         public int SubsidiaryTypeId { get; set; }
         public int Quality { get; set; }

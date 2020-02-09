@@ -12,11 +12,11 @@ const Industry: React.FC<IIndustry> = (props) => {
                     <Button size='sm'>tabort</Button>
                 </Col>
                 <Col>
-                {props.type === 'Felling' && 
+                {props.industryType === 'Felling' && 
                     <Felling
                         industryId={props.industryId}
                         name={props.name}
-                        type={props.type}
+                        industryType={props.industryType}
                         amountLandclearing={props.amountLandclearing}
                         amountLandclearingOfFelling={props.amountLandclearingOfFelling}
                         amountFelling={props.amountFelling}

@@ -258,7 +258,9 @@ namespace Persistence.Migrations
                 {
                     GameSessionId = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    UserLinkId = table.Column<Guid>(nullable: false)
+                    UserLinkId = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    LastUsed = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -386,6 +388,7 @@ namespace Persistence.Migrations
                     FiefId = table.Column<Guid>(nullable: true),
                     AssignmentId = table.Column<Guid>(nullable: true),
                     Name = table.Column<string>(nullable: true),
+                    IndustryType = table.Column<string>(nullable: true),
                     Discriminator = table.Column<string>(nullable: false),
                     AmountLandclearing = table.Column<int>(nullable: true),
                     AmountLandclearingOfFelling = table.Column<int>(nullable: true),

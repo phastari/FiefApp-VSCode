@@ -1,5 +1,5 @@
 import { setLocalStorage } from "../../common/jwt/jwtToken";
-import axios, { TOKEN_KEY, setToken } from "../../common/api/authenticationApi";
+import axios, { TOKEN_KEY, setToken } from "../../common/api/apiClient";
 import { IAuthenticatedUser, IAuthenticationUser } from "./types";
 
 export const handleUserResponse = (user: IAuthenticatedUser) => {
@@ -9,7 +9,7 @@ export const handleUserResponse = (user: IAuthenticatedUser) => {
 }
 
 export const getCurrentUser = async () => {
-    return axios.get<IAuthenticatedUser>('/currentuser');
+    return await axios.get<IAuthenticatedUser>('/currentuser');
 }
 
 export const login = async (user: IAuthenticationUser) => {
@@ -18,7 +18,7 @@ export const login = async (user: IAuthenticationUser) => {
 }
 
 export const register = async (user: IAuthenticationUser) => {
-    return axios.post<IAuthenticatedUser>('/register', user);
+    return await axios.post<IAuthenticatedUser>('/register', user);
 }
 
 export const logout = () => {

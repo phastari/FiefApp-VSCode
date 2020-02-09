@@ -39,10 +39,10 @@ namespace Infrastructure
                 {
                     opt.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                     {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = key,
-                    ValidateAudience = false,
-                    ValidateIssuer = false
+                        ValidIssuer = "me",
+                        ValidAudience = "you",
+                        IssuerSigningKey = key,
+                        RequireExpirationTime = true
                     };
                 });
 

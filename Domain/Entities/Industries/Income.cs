@@ -2,6 +2,10 @@ namespace Domain.Entities.Industries
 {
     public class Income : Industry
     {
+        public Income()
+        {
+            IndustryType = "Income";
+        }
         public bool NeedSteward { get; set; }
         public bool ShowInIncomes { get; set; }
         public bool IsBeingDeveloped { get; set; }

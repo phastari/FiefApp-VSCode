@@ -10,6 +10,7 @@ namespace Domain.Entities.Industries
         public Mine()
         {
             Soldiers = new HashSet<Soldier>();
+            IndustryType = "Mine";
         }
 
         public MineType MineType { get; set; }

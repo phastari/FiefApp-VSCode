@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "../../common/api/authenticationApi";
+import axios from "../../common/api/apiClient";
 import { ISteward, IStewards } from "./types";
 import { StewardsService } from "./states";
 

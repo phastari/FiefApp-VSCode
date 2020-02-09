@@ -1,25 +1,31 @@
 import { useState, useEffect } from "react";
-import { GameSessionsService } from "./states";
-import { IGameSessions, IGameSession } from "./types";
-import axios from "../../common/api/authenticationApi";
+import { IGameSessions, IGameSession, GameSessionsStatuses } from "./types";
+import axios from "../../common/api/apiClient";
 
 const useGameSessionsService = () => {
-    const [result, setResult] = useState<GameSessionsService<IGameSession[]>>({
-        status: 'loading'
-    });
+    const [status, setStatus] = useState<GameSessionsStatuses>(GameSessionsStatuses.INITILIZING);
+    const [sessions, setSessions] = useState<IGameSession[]>([]);
+    const [errors, setErrors] = useState('');
 
     useEffect(() => {
-        if (result.status !== 'loaded') {
-            setTimeout(function () {
-                axios.get<IGameSessions>('/gamesession/getgamesessions')
-                .then(response => setResult({ status: 'loaded', payload: response.data.gameSessions }))
-                .catch(error => setResult({ status: 'error', error }));
-            }, 1000);
-            
+        if (status === GameSessionsStatuses.UPDATE) {
+            setStatus(GameSessionsStatuses.LOADED);
+        } else if (status !== GameSessionsStatuses.LOADED) {
+            axios.get<IGameSessions>('/gamesession/getgamesessions')
+            .then(response => {
+                setStatus(GameSessionsStatuses.LOADED);
+                setSessions(response.data.gameSessions);
+                setErrors('')
+            })
+            .catch(error => {
+                setStatus(GameSessionsStatuses.ERROR);
+                setSessions([]);
+                setErrors(error);
+            });
         }
-    }, [result.status]);
+    }, [status, errors]);
 
-    return result;
+    return {status, setStatus, sessions, errors, setErrors};
 }
 
 export default useGameSessionsService;

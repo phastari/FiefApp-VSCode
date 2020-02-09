@@ -10,7 +10,6 @@ namespace Application
 {
     public interface IFiefAppDbContext
     {
-        DbSet<UserLink> UserLinks { get; set; }
         DbSet<GameSession> GameSessions { get; set; }
         DbSet<Fief> Fiefs { get; set; }
         DbSet<Road> Roads { get; set; }

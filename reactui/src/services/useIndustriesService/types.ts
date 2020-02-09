@@ -1,7 +1,7 @@
 export interface IIndustry {
     industryId: string;
     name: string;
-    type: string;
+    industryType: string;
     amountLandclearing: number | undefined;
     amountLandclearingOfFelling: number | undefined;
     amountFelling: number | undefined;

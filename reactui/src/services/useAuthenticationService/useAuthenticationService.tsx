@@ -3,7 +3,7 @@ import { AuthenticationState, initialAuthenticationState } from './states';
 import { AuthenticationAction, AuthenticationActionTypes } from './types';
 import { authenticationReducer } from './reducers';
 import { getLocalStorageValue, isTokenValid, getUsernameFromToken } from '../../common/jwt/jwtToken';
-import { setToken, TOKEN_KEY } from '../../common/api/authenticationApi';
+import { setToken, TOKEN_KEY } from '../../common/api/apiClient';
 import { logout } from './actions';
 
 type AuthenticationContextProps = {

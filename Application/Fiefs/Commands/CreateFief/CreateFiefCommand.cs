@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
@@ -34,10 +33,7 @@ namespace Application.Fiefs.Commands.CreateFief
 
                     if (session != null)
                     {
-                        var userLinkId = session.UserLinkId;
-                        var link = _context.UserLinks.Where(o => o.UserLinkId == userLinkId).First();
-
-                        if (link.UserName == _user)
+                        if (session.User == _user)
                         {
                             var fief = new Fief { GameSessionId = id };
                             session.Fiefs.Add(fief);

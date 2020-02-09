@@ -36,7 +36,7 @@ namespace Application.GameSessions.Queries.GetGameSessionsList
         public async Task<GetGameSessionsListVm> Handle(GetGameSessionsListQuery request, CancellationToken cancellationToken)
         {
             var entities = await _context.GameSessions
-                .Where(o => o.UserLink.UserName == _currentUser)
+                .Where(o => o.User == _currentUser)
                 .ProjectTo<GameSessionLookupDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
 
@@ -58,14 +58,16 @@ namespace Application.GameSessions.Queries.GetGameSessionsList
     {
         public Guid GameSessionId { get; set; }
         public string Name { get; set; }
-        public Guid UserLinkId { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime LastUsed { get; set; }
 
         public void Mapping(Profile profile)
         {
             profile.CreateMap<GameSession, GameSessionLookupDto>()
                 .ForMember(d => d.GameSessionId, opt => opt.MapFrom(s => s.GameSessionId))
                 .ForMember(d => d.Name, opt => opt.MapFrom(s => s.Name))
-                .ForMember(d => d.UserLinkId, opt => opt.MapFrom(s => s.UserLinkId));
+                .ForMember(d => d.Created, opt => opt.MapFrom(s => s.Created))
+                .ForMember(d => d.LastUsed, opt => opt.MapFrom(s => s.LastUsed));
         }
     }
 }

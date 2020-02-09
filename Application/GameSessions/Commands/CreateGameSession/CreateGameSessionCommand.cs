@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Interfaces;
@@ -6,10 +7,10 @@ using MediatR;
 
 namespace Application.GameSessions.Commands.CreateGameSession
 {
-    public class CreateGameSessionCommand : IRequest<string>
+    public class CreateGameSessionCommand : IRequest<GameSession>
     {
 
-        public class Handler : IRequestHandler<CreateGameSessionCommand, string>
+        public class Handler : IRequestHandler<CreateGameSessionCommand, GameSession>
         {
             private readonly IFiefAppDbContext _context;
             private readonly IMediator _mediator;
@@ -22,34 +23,22 @@ namespace Application.GameSessions.Commands.CreateGameSession
                 _user = userService.GetCurrentUsername();
             }
 
-            public async Task<string> Handle(CreateGameSessionCommand request, CancellationToken cancellationToken)
+            public async Task<GameSession> Handle(CreateGameSessionCommand request, CancellationToken cancellationToken)
             {
-                var userLink = new UserLink();
+                var gameSession = new GameSession();
 
                 if (_user == "00000000-0000-0000-0000-000000000000")
                 {
-                    userLink.UserName = "00000000-0000-0000-0000-000000000000";
+                    gameSession.User = "00000000-0000-0000-0000-000000000000";
                 }
                 else
                 {
-                    userLink.UserName = _user;
-                }
-
-                _context.UserLinks.Add(userLink);
-                await _context.SaveChangesAsync(cancellationToken);
-                var gameSession = new GameSession
-                {
-                    UserLinkId = userLink.UserLinkId
-                };
-
+                    gameSession.User = _user;
+                }   
                 _context.GameSessions.Add(gameSession);
                 await _context.SaveChangesAsync(cancellationToken);
 
-                var fief = new Fief { GameSessionId = gameSession.GameSessionId };
-                gameSession.Fiefs.Add(fief);
-                await _context.SaveChangesAsync(cancellationToken);
-
-                return gameSession.GameSessionId.ToString();
+                return gameSession;
             }
         }
     }

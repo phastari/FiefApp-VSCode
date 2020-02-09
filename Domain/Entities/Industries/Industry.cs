@@ -11,6 +11,6 @@ namespace Domain.Entities.Industries
         public Guid? AssignmentId { get; set; }
         #nullable disable
         public string Name { get; set; }
-        public string Type { get; set; }
+        public string IndustryType { get; set; }
     }
 }

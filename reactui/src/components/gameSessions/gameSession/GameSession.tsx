@@ -1,14 +1,24 @@
 import React, { Fragment } from 'react';
 import { Row, Col, Button } from 'reactstrap';
-import { IGameSession } from '../../../services/useGameSessionsService/types';
 
-const GameSession: React.FC<IGameSession> = (props) => {
+interface PropsFromState {
+    gameSessionId: string;
+    name: string;
+    created: Date;
+    lastUsed: Date;
+}
+
+type AllProps = PropsFromState & { handleDelete: any };
+
+const GameSession: React.FC<AllProps> = (props) => {
     return (
         <Fragment>
             <Row>
                 <Col>{ props.name }</Col>
+                <Col>{ props.created }</Col>
+                <Col>{ props.lastUsed }</Col>
                 <Col>
-                    <Button size='sm'>tabort</Button>
+                    <Button size='sm' onClick={() => props.handleDelete()}>tabort</Button>
                 </Col>
             </Row>
         </Fragment>

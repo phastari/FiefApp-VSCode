@@ -11,7 +11,7 @@ namespace Application.GameSessions.Commands.DeleteGameSession
 {
     public class DeleteGameSessionCommand : IRequest<bool>
     {
-        public string Id { get; set; }
+        public string GameSessionId { get; set; }
 
         public class Handler : IRequestHandler<DeleteGameSessionCommand, bool>
         {
@@ -26,7 +26,7 @@ namespace Application.GameSessions.Commands.DeleteGameSession
 
             public async Task<bool> Handle(DeleteGameSessionCommand request, CancellationToken cancellationToken)
             {
-                var session = await _context.GameSessions.Where(o => o.GameSessionId.ToString() == request.Id).FirstOrDefaultAsync();
+                var session = await _context.GameSessions.Where(o => o.GameSessionId.ToString() == request.GameSessionId).FirstOrDefaultAsync();
 
                 _context.GameSessions.Remove(session);
 
