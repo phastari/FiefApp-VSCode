@@ -1,6 +1,6 @@
-import { IGameSession } from "../../../services/useGameSessionsService/types";
 import axios from "../../../common/api/apiClient";
 import { AxiosError } from "axios";
+import { IGameSession } from "../../../common/models/gamesession";
 
 export const createGameSession = async () => {
     try {

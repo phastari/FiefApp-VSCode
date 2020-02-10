@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
-using Application.Common.Helpers;
 using Application.Common.Interfaces;
 using Application.Common.Mappings;
 using AutoMapper;
@@ -37,9 +36,6 @@ namespace Application.Taxs.Queries.GetTaxsList
         {
             if (Guid.TryParse(request.FiefId, out Guid id))
             {
-                var helper = new GetUserNameFromFiefId(_context);
-                if (await helper.Check(id, _user))
-                {
                     var taxes = await _context.Industries
                         .Where(o => o.Fief.FiefId == id && typeof(Tax) == o.GetType())
                         .ProjectTo<TaxLookupDto>(_mapper.ConfigurationProvider)
@@ -51,7 +47,6 @@ namespace Application.Taxs.Queries.GetTaxsList
                     };
 
                     return vm;
-                }
 
                 throw new CustomException($"GetDetailedIncomeQuery >> Unauthorized!");
             }

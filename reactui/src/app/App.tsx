@@ -7,6 +7,7 @@ import { Router } from '@reach/router';
 import Home from '../components/home/Home';
 import TopNavBar from '../components/topNavBar/TopNavBar';
 import { AuthenticationActionTypes } from '../services/useAuthenticationService/types';
+import Information from '../components/fiefManager/information/Information';
 
 const App = () => {
   const {
@@ -48,7 +49,8 @@ const App = () => {
       <TopNavBar />
       <Router>
         <Home default path='/'/>
-        <GameSessions path='gamesessions' /> 
+        <GameSessions path='gamesessions' />
+        <Information path='fiefmanager/information' />
       </Router>
     </Fragment>
   );

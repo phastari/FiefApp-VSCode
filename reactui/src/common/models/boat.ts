@@ -1,0 +1,46 @@
+import { IBoatbuilder } from "./boatbuilder";
+import { ISoldier } from "./soldier";
+import { IShipyard } from "./shipyard";
+import { ICargo } from "./cargo";
+
+export interface IBoat {
+    boatId: string;
+    boatbuilder: IBoatbuilder | null;
+    cargo: ICargo | null;
+    shipyard: IShipyard | null;
+    soldiers: ISoldier[];
+    name: string;
+    length: number;
+    width: number;
+    depth: number;
+    crewNeeded: number;
+    seamens: number;
+    mariners: number;
+    rowers: number;
+    rowersNeeded: number;
+    maxCargo: number;
+    sailors: number;
+    officers: number;
+    navigators: number;
+    amount: number;
+    costWhenFinishedSilver: number;
+    nextFinishedDays: number;
+    buildTimeInDays: number;
+    buildTimeInDaysAll: number;
+    status: string;
+    backIn: number;
+    type: string;
+    displayName: string;
+    masts: number;
+    lengthMin: number;
+    lengthMax: number;
+    bl: number;
+    db: number;
+    crew: number;
+    benchMod: number;
+    benchMulti: number;
+    oarsMulti: number;
+    rowerMulti: number;
+    seaworthiness: number;
+    imgSource: string;
+}

@@ -2,7 +2,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
-using Application.Common.Helpers;
 using Application.Common.Interfaces;
 using Domain.Entities.Industries;
 using MediatR;
@@ -54,9 +53,6 @@ namespace Application.Mines.Commands.UpdateMine
                         throw new CustomException($"UpdateQuarryCommand >> Could not find Fief({mine.Fief.FiefId}).");
                     }
 
-                    var helper = new GetUserNameFromFiefId(_context);
-                    if (await helper.Check(fief.FiefId, _user))
-                    {
                         if (request.Silver != mine.Silver && request.Silver != null)
                         {
                             mine.Silver = (int)request.Silver;
@@ -94,7 +90,6 @@ namespace Application.Mines.Commands.UpdateMine
 
                         await _context.SaveChangesAsync(cancellationToken);
                         return true;
-                    }
 
                     throw new CustomException($"UpdateMineCommand >> Unauthorized!");
                 }

@@ -2,7 +2,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
-using Application.Common.Helpers;
 using Application.Common.Interfaces;
 using Application.Common.Mappings;
 using AutoMapper;
@@ -40,16 +39,12 @@ namespace Application.Subsidiaries.Queries.GetDetailedSubsidiary
                     throw new CustomException($"GetDetailedSubsidiaryQuery >> Could not find Subsidiary({request.IndustryId}).");
                 }
 
-                var helper = new GetUserNameFromFiefId(_context);
-                if (await helper.Check(subsidiary.Fief.FiefId, _user))
-                {
                     var vm = new GetDetailedSubsidiaryVm
                     {
                         Subsidiary = _mapper.Map<DetailedSubsidiaryLookupDto>(subsidiary)
                     };
 
                     return vm;
-                }
 
                 throw new CustomException($"GetDetailedIncomeQuery >> Unauthorized!");
             }

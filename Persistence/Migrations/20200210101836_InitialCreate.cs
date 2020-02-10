@@ -100,6 +100,21 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "GameSessions",
+                columns: table => new
+                {
+                    GameSessionId = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    User = table.Column<string>(nullable: true),
+                    Created = table.Column<DateTime>(nullable: false),
+                    LastUsed = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GameSessions", x => x.GameSessionId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "InheritanceTypes",
                 columns: table => new
                 {
@@ -223,18 +238,6 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserLinks",
-                columns: table => new
-                {
-                    UserLinkId = table.Column<Guid>(nullable: false),
-                    UserName = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserLinks", x => x.UserLinkId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Developments",
                 columns: table => new
                 {
@@ -250,27 +253,6 @@ namespace Persistence.Migrations
                         principalTable: "Assignments",
                         principalColumn: "AssignmentId",
                         onDelete: ReferentialAction.SetNull);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "GameSessions",
-                columns: table => new
-                {
-                    GameSessionId = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    UserLinkId = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    LastUsed = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_GameSessions", x => x.GameSessionId);
-                    table.ForeignKey(
-                        name: "FK_GameSessions_UserLinks_UserLinkId",
-                        column: x => x.UserLinkId,
-                        principalTable: "UserLinks",
-                        principalColumn: "UserLinkId",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -1266,11 +1248,6 @@ namespace Persistence.Migrations
                 column: "InheritanceTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GameSessions_UserLinkId",
-                table: "GameSessions",
-                column: "UserLinkId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Industries_AssignmentId",
                 table: "Industries",
                 column: "AssignmentId",
@@ -1553,9 +1530,6 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "InheritanceTypes");
-
-            migrationBuilder.DropTable(
-                name: "UserLinks");
         }
     }
 }

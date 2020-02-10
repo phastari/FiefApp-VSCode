@@ -2,7 +2,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
-using Application.Common.Helpers;
 using Application.Common.Interfaces;
 using Domain.Entities.Industries;
 using MediatR;

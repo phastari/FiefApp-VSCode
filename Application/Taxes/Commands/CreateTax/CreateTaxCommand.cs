@@ -2,7 +2,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
-using Application.Common.Helpers;
 using Application.Common.Interfaces;
 using Domain.Entities.Industries;
 using MediatR;
@@ -38,9 +37,6 @@ namespace Application.Taxes.Commands.CreateTax
                         throw new CustomException($"CreateTaxCommand >> Could not find Fief({fief.FiefId}).");
                     }
 
-                    var helper = new GetUserNameFromFiefId(_context);
-                    if (await helper.Check(fief.FiefId, _user))
-                    {
                         var tax = new Tax
                         {
                             Name = request.TaxName
@@ -51,7 +47,6 @@ namespace Application.Taxes.Commands.CreateTax
                         await _context.SaveChangesAsync(cancellationToken);
 
                         return true;
-                    }
 
                     throw new CustomException($"CreateTaxCommand >> Unauthorized!");
                 }

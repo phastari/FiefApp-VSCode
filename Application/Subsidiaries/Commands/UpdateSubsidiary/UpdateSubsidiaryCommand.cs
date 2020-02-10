@@ -2,7 +2,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
-using Application.Common.Helpers;
 using Application.Common.Interfaces;
 using Domain.Entities.Industries;
 using MediatR;
@@ -58,9 +57,6 @@ namespace Application.Subsidiaries.Commands.UpdateSubsidiary
                         throw new CustomException($"UpdateSubsidiaryCommand >> Could not find Fief({subsidiary.Fief.FiefId}).");
                     }
 
-                    var helper = new GetUserNameFromFiefId(_context);
-                    if (await helper.Check(fief.FiefId, _user))
-                    {
                         if (request.Quality != subsidiary.Quality && request.Quality != null)
                         {
                             subsidiary.Quality = (int)request.Quality;
@@ -118,7 +114,6 @@ namespace Application.Subsidiaries.Commands.UpdateSubsidiary
 
                         await _context.SaveChangesAsync(cancellationToken);
                         return true;
-                    }
 
                     throw new CustomException($"UpdateSubsidiaryCommand >> Unauthorized!");
                 }

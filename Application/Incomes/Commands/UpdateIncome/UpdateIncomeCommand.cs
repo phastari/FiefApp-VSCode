@@ -2,7 +2,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
-using Application.Common.Helpers;
 using Application.Common.Interfaces;
 using Domain.Entities.Industries;
 using MediatR;
@@ -47,8 +46,7 @@ namespace Application.Incomes.Commands.UpdateIncome
                     var income = (Income)await _context.Industries.FindAsync(id);
                     var fief = await _context.Fiefs.FindAsync(income.Fief.FiefId);
 
-                    var helper = new GetUserNameFromFiefId(_context);
-                    if (await helper.Check(fief.FiefId, _user))
+                    if (fief.GameSession.User == _user)
                     {
                         if (request.NeedSteward != income.NeedSteward && request.NeedSteward != null)
                         {

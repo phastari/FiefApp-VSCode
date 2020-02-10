@@ -2,7 +2,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
-using Application.Common.Helpers;
 using Application.Common.Interfaces;
 using Domain.Entities.Industries;
 using MediatR;
@@ -46,15 +45,11 @@ namespace Application.Taxes.Commands.DeleteTax
                         throw new CustomException($"DeleteTaxCommand >> Fief({tax.Fief.FiefId}) could not be found!");
                     }
 
-                    var helper = new GetUserNameFromFiefId(_context);
-                    if (await helper.Check(fief.FiefId, _user))
-                    {
                         fief.Industries.Remove(tax);
 
                         await _context.SaveChangesAsync(cancellationToken);
 
                         return true;
-                    }
 
                     throw new CustomException($"DeleteTaxCommand >> Unauthorized!");
                 }

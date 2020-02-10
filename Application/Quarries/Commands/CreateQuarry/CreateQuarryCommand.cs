@@ -2,7 +2,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
-using Application.Common.Helpers;
 using Application.Common.Interfaces;
 using Domain.Entities.Industries;
 using MediatR;
@@ -34,9 +33,6 @@ namespace Application.Quarries.Commands.CreateQuarry
                 {
                     var fief = await _context.Fiefs.FindAsync(id);
 
-                    var helper = new GetUserNameFromFiefId(_context);
-                    if (await helper.Check(fief.FiefId, _user))
-                    {
                         var quarry = new Quarry
                         {
                             Fief = fief,
@@ -51,7 +47,6 @@ namespace Application.Quarries.Commands.CreateQuarry
                         await _context.SaveChangesAsync(cancellationToken);
 
                         return true;
-                    }
 
                     throw new CustomException($"CreateQuarryCommand >> Unauthorized!");
                 }

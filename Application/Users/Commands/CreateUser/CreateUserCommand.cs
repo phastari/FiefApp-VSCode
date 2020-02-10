@@ -41,9 +41,6 @@ namespace Application.Users.Commands.CreateUser
 
                     if (created)
                     {
-                        await _context.UserLinks.AddAsync(new UserLink { UserName = request.UserName });
-                        await _context.SaveChangesAsync(cancellationToken);
-
                         var addedUser = await _userManager.FindByNameAsync(request.UserName);
 
                         vm.Token = _jwtGenerator.CreateToken(addedUser);

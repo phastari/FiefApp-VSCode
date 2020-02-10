@@ -1,10 +1,9 @@
 import React, { Fragment } from 'react';
 import Steward from '../steward/Steward';
-import { ISteward } from '../types';
 import useStewardsService from '../../../../services/useStewardsService/useStewardsService';
 import Loading from '../../../loading/Loading';
 
-const GameSessions: React.FC = () => {
+const Stewards: React.FC = () => {
     const service = useStewardsService();
 
     return (
@@ -32,4 +31,4 @@ const GameSessions: React.FC = () => {
     )
 }
 
-export default GameSessions;
+export default Stewards;

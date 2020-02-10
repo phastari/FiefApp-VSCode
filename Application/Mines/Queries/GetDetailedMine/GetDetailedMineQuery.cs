@@ -2,7 +2,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
-using Application.Common.Helpers;
 using Application.Common.Interfaces;
 using Application.Common.Mappings;
 using AutoMapper;
@@ -40,16 +39,12 @@ namespace Application.Mines.Queries.GetDetailedMine
                     throw new CustomException($"GetDetailedMineQuery >> Could not find Mine({request.IndustryId}).");
                 }
 
-                var helper = new GetUserNameFromFiefId(_context);
-                if (await helper.Check(mine.Fief.FiefId, _user))
-                {
                     var vm = new GetDetailedMineVm
                     {
                         Mine = _mapper.Map<DetailedMineLookupDto>(mine)
                     };
 
                     return vm;
-                }
 
                 throw new CustomException($"GetDetailedIncomeQuery >> Unauthorized!");
             }

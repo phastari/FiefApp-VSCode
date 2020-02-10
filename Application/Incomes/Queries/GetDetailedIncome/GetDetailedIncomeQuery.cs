@@ -2,7 +2,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
-using Application.Common.Helpers;
 using Application.Common.Interfaces;
 using Application.Common.Mappings;
 using AutoMapper;
@@ -33,9 +32,6 @@ namespace Application.Incomes.Queries.GetDetailedIncome
         {
             if (Guid.TryParse(request.IndustryId, out Guid id))
             {
-                var helper = new GetUserNameFromFiefId(_context);
-                if (await helper.Check(id, _user))
-                {
                     var income = await _context.Industries.FindAsync(id);
 
                     var vm = new GetDetailedIncomeVm
@@ -44,7 +40,6 @@ namespace Application.Incomes.Queries.GetDetailedIncome
                     };
 
                     return vm;
-                }
 
                 throw new CustomException($"GetDetailedIncomeQuery >> Unauthorized!");
             }

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { IGameSessions, IGameSession, GameSessionsStatuses } from "./types";
+import { GameSessionsStatuses } from "./types";
 import axios from "../../common/api/apiClient";
+import { IGameSession, IGameSessions } from "../../common/models/gamesession";
 
 const useGameSessionsService = () => {
     const [status, setStatus] = useState<GameSessionsStatuses>(GameSessionsStatuses.INITILIZING);

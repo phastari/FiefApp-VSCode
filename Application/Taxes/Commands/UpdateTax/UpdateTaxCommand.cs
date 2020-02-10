@@ -2,7 +2,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
-using Application.Common.Helpers;
 using Application.Common.Interfaces;
 using Domain.Entities.Industries;
 using MediatR;
@@ -51,9 +50,6 @@ namespace Application.Taxes.Commands.UpdateTax
                         throw new CustomException($"UpdateTaxCommand >> Could not find Fief({tax.Fief.FiefId}).");
                     }
 
-                    var helper = new GetUserNameFromFiefId(_context);
-                    if (await helper.Check(fief.FiefId, _user))
-                    {
                         if (request.NumberOfBailiffs != tax.NumberOfBailiffs && request.NumberOfBailiffs != null)
                         {
                             tax.NumberOfBailiffs = (int)request.NumberOfBailiffs;
@@ -76,7 +72,6 @@ namespace Application.Taxes.Commands.UpdateTax
 
                         await _context.SaveChangesAsync(cancellationToken);
                         return true;
-                    }
 
                     throw new CustomException($"UpdateTaxCommand >> Unauthorized!");
                 }

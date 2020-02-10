@@ -2,7 +2,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
-using Application.Common.Helpers;
 using Application.Common.Interfaces;
 using Application.Common.Mappings;
 using AutoMapper;
@@ -40,16 +39,12 @@ namespace Application.Taxes.Queries.GetDetailedTax
                     throw new CustomException($"GetDetailedTaxQuery >> Could not find Tax({request.IndustryId}).");
                 }
 
-                var helper = new GetUserNameFromFiefId(_context);
-                if (await helper.Check(tax.Fief.FiefId, _user))
-                {
                     var vm = new GetDetailedTaxVm
                     {
                         Tax = _mapper.Map<DetailedTaxLookupDto>(tax)
                     };
 
                     return vm;
-                }
 
                 throw new CustomException($"GetDetailedIncomeQuery >> Unauthorized!");
             }

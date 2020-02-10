@@ -1,14 +1,17 @@
 import React, { Fragment } from 'react';
 import useGameSessionsService from '../../../services/useGameSessionsService/useGameSessionsService';
 import Loading from '../../loading/Loading';
-import { RouteComponentProps } from '@reach/router';
-import { Button } from 'reactstrap';
+import { RouteComponentProps, navigate } from '@reach/router';
+import { Button, Row, Col } from 'reactstrap';
 import { createGameSession, deleteGameSession } from './actions';
 import GameSession from '../gameSession/GameSession';
 import { GameSessionsStatuses } from '../../../services/useGameSessionsService/types';
+import useFiefManagerService from '../../../services/useFiefManagerService/useFiefManagerService';
+import { FiefManagerStatuses } from '../../../services/useFiefManagerService/types';
 
 const GameSessions: React.FC<RouteComponentProps> = (_: RouteComponentProps) => {
     const service = useGameSessionsService();
+    const fmService = useFiefManagerService();
 
     const handleCreate = async () => {
         let session = await createGameSession();
@@ -34,6 +37,12 @@ const GameSessions: React.FC<RouteComponentProps> = (_: RouteComponentProps) => 
             }
         }
     }
+
+    const selectSession = async (id: string) => {
+        fmService.setGameSessionId(id);
+        fmService.setStatus(FiefManagerStatuses.LOADING);
+        navigate('/fiefmanager/information');
+    }
     
     return (
         <Fragment>
@@ -43,16 +52,26 @@ const GameSessions: React.FC<RouteComponentProps> = (_: RouteComponentProps) => 
                 <div>{service.errors}</div>
             )}
 
-            {service.status === GameSessionsStatuses.LOADED && 
-            service.sessions.map(session => (
-                <GameSession
+            {service.status === GameSessionsStatuses.LOADED && (
+            <Fragment>
+                <Row>
+                    <Col>Sessions namn</Col>
+                    <Col>Skapad (UTC)</Col>
+                    <Col>Senast använd</Col>
+                    <Col></Col>
+                </Row>
+            {service.sessions.map(session => (
+                <GameSession 
                     key={session.gameSessionId}
                     gameSessionId = {session.gameSessionId}
                     name = {session.name}
                     created = {session.created}
                     lastUsed = {session.lastUsed} 
+                    selectSession = {() => selectSession(session.gameSessionId)}
                     handleDelete = {() => handleDelete(session.gameSessionId)}/>
             ))}
+            </Fragment>
+            )}
             <Button onClick={() => {handleCreate()}}>skapa ny session</Button>
         </Fragment>
     );

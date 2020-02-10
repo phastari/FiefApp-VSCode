@@ -37,14 +37,6 @@ namespace Application.Users.Commands.DeleteUser
 
                     if (deleted.Succeeded)
                     {
-                        var delList = await _context.UserLinks.Where(o => o.UserName == request.UserName).ToListAsync();
-
-                        await
-                        foreach (var item in (IAsyncEnumerable<UserLink>)delList)
-                        {
-                            _context.UserLinks.Remove(item);
-                        }
-
                         return true;
                     }
 

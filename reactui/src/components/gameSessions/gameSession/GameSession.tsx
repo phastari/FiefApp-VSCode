@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { Row, Col, Button } from 'reactstrap';
+import './gamesession.css';
 
 interface PropsFromState {
     gameSessionId: string;
@@ -8,12 +9,12 @@ interface PropsFromState {
     lastUsed: Date;
 }
 
-type AllProps = PropsFromState & { handleDelete: any };
+type AllProps = PropsFromState & { handleDelete: any, selectSession: any };
 
 const GameSession: React.FC<AllProps> = (props) => {
     return (
         <Fragment>
-            <Row>
+            <Row id='gamesessionrow' onClick={() => props.selectSession()}>
                 <Col>{ props.name }</Col>
                 <Col>{ props.created }</Col>
                 <Col>{ props.lastUsed }</Col>

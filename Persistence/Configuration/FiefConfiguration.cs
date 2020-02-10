@@ -21,6 +21,7 @@ namespace Persistence.Configuration
             builder.Property(e => e.EducationDevelopmentLevel).HasDefaultValue(1);
             builder.Property(e => e.HealthcareDevelopmentLevel).HasDefaultValue(1);
             builder.Property(e => e.MilitaryDevelopmentLevel).HasDefaultValue(1);
+            builder.Property(e => e.SeafaringDevelopmentLevel).HasDefaultValue(1);
 
             builder
                 .HasOne(p => p.GameSession)

@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Application.Fiefs.Commands.CreateFief;
 using Application.Fiefs.Commands.DeleteFief;
@@ -34,10 +35,10 @@ namespace API.Controllers
             return Ok(vm);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Get([FromBody] GetDetailedFiefQuery query)
+        [HttpGet]
+        public async Task<IActionResult> Get([FromQuery(Name = "0")] string id)
         {
-            var vm = await Mediator.Send(query);
+            var vm = await Mediator.Send(new GetDetailedFiefQuery() { Id = id });
 
             return Ok(vm.Fief);
         }

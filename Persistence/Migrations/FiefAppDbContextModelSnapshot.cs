@@ -354,12 +354,10 @@ namespace Persistence.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("UserLinkId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("User")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("GameSessionId");
-
-                    b.HasIndex("UserLinkId");
 
                     b.ToTable("GameSessions");
                 });
@@ -2689,20 +2687,6 @@ namespace Persistence.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Domain.Entities.UserLink", b =>
-                {
-                    b.Property<Guid>("UserLinkId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserLinkId");
-
-                    b.ToTable("UserLinks");
-                });
-
             modelBuilder.Entity("Domain.Entities.Village", b =>
                 {
                     b.Property<Guid>("VillageId")
@@ -2979,15 +2963,6 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.Entities.Types.InheritanceType", null)
                         .WithMany("Fiefs")
                         .HasForeignKey("InheritanceTypeId");
-                });
-
-            modelBuilder.Entity("Domain.Entities.GameSession", b =>
-                {
-                    b.HasOne("Domain.Entities.UserLink", "UserLink")
-                        .WithMany("GameSessions")
-                        .HasForeignKey("UserLinkId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Entities.Industries.Industry", b =>

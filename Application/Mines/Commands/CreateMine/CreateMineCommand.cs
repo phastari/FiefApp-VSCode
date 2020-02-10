@@ -2,7 +2,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
-using Application.Common.Helpers;
 using Application.Common.Interfaces;
 using Domain.Entities.Industries;
 using MediatR;
@@ -33,10 +32,7 @@ namespace Application.Mines.Commands.CreateMine
                 if (Guid.TryParse(request.FiefId, out Guid id))
                 {
                     var fief = await _context.Fiefs.FindAsync(id);
-
-                    var helper = new GetUserNameFromFiefId(_context);
-                    if (await helper.Check(fief.FiefId, _user))
-                    {
+                    
                         var mine = new Mine
                         {
                             Fief = fief,
@@ -50,7 +46,6 @@ namespace Application.Mines.Commands.CreateMine
                         await _context.SaveChangesAsync(cancellationToken);
 
                         return true;
-                    }
 
                     throw new CustomException($"CreateMineCommand >> Unauthorized!");
                 }

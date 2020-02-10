@@ -2,9 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
-using Application.Common.Helpers;
 using Application.Common.Interfaces;
-using Domain.Entities.Industries;
 using MediatR;
 
 namespace Application.Incomes.Commands.CreateIncome
@@ -44,28 +42,8 @@ namespace Application.Incomes.Commands.CreateIncome
             {
                 if (Guid.TryParse(request.FiefId, out Guid id))
                 {
-                    var helper = new GetUserNameFromFiefId(_context);
-                    if (await helper.Check(id, _user))
                     {
-                        var income = new Income
-                        {
-                            NeedSteward = request.NeedSteward,
-                            ShowInIncomes = request.ShowInIncomes,
-                            IsBeingDeveloped = false,
-                            Silver = request.Silver,
-                            Base = request.Base,
-                            Luxury = request.Luxury,
-                            Wood = request.Wood,
-                            SpringModifier = request.SpringModifier,
-                            SummerModifier = request.SummerModifier,
-                            FallModifier = request.FallModifier,
-                            WinterModifier = request.WinterModifier
-                        };
-
-                        var fief = await _context.Fiefs.FindAsync(id);
-                        fief.Industries.Add(income);
-
-                        await _context.SaveChangesAsync(cancellationToken);
+                        await _context.Industries.FindAsync(id);
                     }
 
                     throw new CustomException($"CreateIncomeCommand >> Unauthorized!");

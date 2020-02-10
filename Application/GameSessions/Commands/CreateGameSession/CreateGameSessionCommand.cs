@@ -34,7 +34,11 @@ namespace Application.GameSessions.Commands.CreateGameSession
                 else
                 {
                     gameSession.User = _user;
-                }   
+                }
+
+                var count = _context.GameSessions.Where(o => o.User == gameSession.User).Count();
+                gameSession.Name = $"Session{++count}";
+
                 _context.GameSessions.Add(gameSession);
                 await _context.SaveChangesAsync(cancellationToken);
 
