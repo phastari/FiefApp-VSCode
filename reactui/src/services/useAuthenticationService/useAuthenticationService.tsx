@@ -1,4 +1,4 @@
-import React, { Dispatch, createContext, PropsWithChildren } from 'react';
+import React, { Dispatch, createContext, PropsWithChildren, useEffect, useContext, useReducer } from 'react';
 import { AuthenticationState, initialAuthenticationState } from './states';
 import { AuthenticationAction, AuthenticationActionTypes } from './types';
 import { authenticationReducer } from './reducers';
@@ -17,8 +17,9 @@ const AuthenticationContext = createContext<AuthenticationContextProps>({
 });
 
 export const AuthenticationProvider: React.FC<PropsWithChildren<{}>> = (props) => {
-  const [state, dispatch] = React.useReducer(authenticationReducer, initialAuthenticationState);
-  React.useEffect(() => {
+  const [state, dispatch] = useReducer(authenticationReducer, initialAuthenticationState);
+  
+  useEffect(() => {
     const token = getLocalStorageValue(TOKEN_KEY);
 
     if (!token) return;
@@ -37,5 +38,5 @@ export const AuthenticationProvider: React.FC<PropsWithChildren<{}>> = (props) =
 }
 
 export default function useAuthenticationService() {
-  return React.useContext(AuthenticationContext);
+  return useContext(AuthenticationContext);
 }

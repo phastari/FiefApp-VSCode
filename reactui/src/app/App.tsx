@@ -8,6 +8,7 @@ import Home from '../components/home/Home';
 import TopNavBar from '../components/topNavBar/TopNavBar';
 import { AuthenticationActionTypes } from '../services/useAuthenticationService/types';
 import Information from '../components/fiefManager/information/Information';
+import { FiefManagerProvider } from '../services/useFiefManagerService/useFiefManagerService';
 
 const App = () => {
   const {
@@ -58,6 +59,8 @@ const App = () => {
 
 export default () => (
   <AuthenticationProvider>
+    <FiefManagerProvider>
     <App />
+    </FiefManagerProvider>
   </AuthenticationProvider>
 )

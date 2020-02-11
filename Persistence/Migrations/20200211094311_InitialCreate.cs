@@ -280,7 +280,7 @@ namespace Persistence.Migrations
                     EducationDevelopmentLevel = table.Column<int>(nullable: false, defaultValue: 1),
                     HealthcareDevelopmentLevel = table.Column<int>(nullable: false, defaultValue: 1),
                     MilitaryDevelopmentLevel = table.Column<int>(nullable: false, defaultValue: 1),
-                    SeafaringDevelopmentLevel = table.Column<int>(nullable: false),
+                    SeafaringDevelopmentLevel = table.Column<int>(nullable: false, defaultValue: 1),
                     InheritanceTypeId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>

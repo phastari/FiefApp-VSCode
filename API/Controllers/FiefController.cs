@@ -38,6 +38,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery(Name = "0")] string id)
         {
+            Console.WriteLine($"ID: {id}");
             var vm = await Mediator.Send(new GetDetailedFiefQuery() { Id = id });
 
             return Ok(vm.Fief);

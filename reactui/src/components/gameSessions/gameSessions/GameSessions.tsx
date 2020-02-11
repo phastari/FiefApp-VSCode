@@ -7,7 +7,6 @@ import { createGameSession, deleteGameSession } from './actions';
 import GameSession from '../gameSession/GameSession';
 import { GameSessionsStatuses } from '../../../services/useGameSessionsService/types';
 import useFiefManagerService from '../../../services/useFiefManagerService/useFiefManagerService';
-import { FiefManagerStatuses } from '../../../services/useFiefManagerService/types';
 
 const GameSessions: React.FC<RouteComponentProps> = (_: RouteComponentProps) => {
     const service = useGameSessionsService();
@@ -39,8 +38,7 @@ const GameSessions: React.FC<RouteComponentProps> = (_: RouteComponentProps) => 
     }
 
     const selectSession = async (id: string) => {
-        fmService.setGameSessionId(id);
-        fmService.setStatus(FiefManagerStatuses.LOADING);
+        fmService.state.gameSessionId = id;
         navigate('/fiefmanager/information');
     }
     

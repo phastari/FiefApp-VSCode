@@ -313,7 +313,9 @@ namespace Persistence.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("SeafaringDevelopmentLevel")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
 
                     b.Property<int>("UnusableAcres")
                         .HasColumnType("int");
