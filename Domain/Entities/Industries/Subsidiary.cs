@@ -9,7 +9,7 @@ namespace Domain.Entities.Industries
         {
             IndustryType = "Subsidiary";
         }
-        public SubsidiaryType SubsidiaryType { get; set; }
+        public virtual SubsidiaryType SubsidiaryType { get; set; }
         public int SubsidiaryTypeId { get; set; }
         public int Quality { get; set; }
         public int DevelopmentLevel { get; set; }

@@ -10,7 +10,7 @@ namespace Persistence
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<FiefAppDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("FiefAppDatabase")));
+                options.UseLazyLoadingProxies().UseSqlServer(configuration.GetConnectionString("FiefAppDatabase")));
 
             services.AddScoped<IFiefAppDbContext>(provider => provider.GetService<FiefAppDbContext>());
 

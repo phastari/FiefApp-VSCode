@@ -6,7 +6,7 @@ namespace Domain.Entities
     {
         public Guid DevelopmentId { get; set; }
         #nullable enable
-        public Assignment? Assignment { get; set; }
+        public virtual Assignment? Assignment { get; set; }
         public Guid? AssignmentId { get; set; }
         #nullable disable
     }

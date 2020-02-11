@@ -14,16 +14,16 @@ namespace Domain.Entities
         }
 
         public Guid PortId { get; set; }
-        public Fief Fief { get; set; }
+        public virtual Fief Fief { get; set; }
         public Guid FiefId { get; set; }
 #nullable enable
-        public Assignment? Assignment { get; set; }
+        public virtual Assignment? Assignment { get; set; }
         public Guid? AssignmentId { get; set; }
-        public Shipyard? Shipyard { get; set; }
+        public virtual Shipyard? Shipyard { get; set; }
 #nullable disable
-        public ICollection<Boat> Boats { get; set; }
-        public ICollection<Merchant> Merchants { get; set; }
-        public ICollection<Soldier> Soldiers { get; set; }
+        public virtual ICollection<Boat> Boats { get; set; }
+        public virtual ICollection<Merchant> Merchants { get; set; }
+        public virtual ICollection<Soldier> Soldiers { get; set; }
         public string Name { get; set; }
         public int DevelopmentLevel { get; set; }
         public int Merchandise { get; set; }

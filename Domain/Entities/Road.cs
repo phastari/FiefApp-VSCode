@@ -15,9 +15,9 @@ namespace Domain.Entities
         public Guid RoadId { get; set; }
         public virtual Fief Fief { get; set; }
         public Guid FiefId { get; set; }
-        public RoadType RoadType { get; set; }
+        public virtual RoadType RoadType { get; set; }
         public int RoadTypeId { get; set; }
-        public ICollection<Soldier> Soldiers { get; set; }
+        public virtual ICollection<Soldier> Soldiers { get; set; }
         public string Name { get; set; }
     }
 }

@@ -7,16 +7,16 @@ namespace Domain.Entities
     public class Assignment 
     {
         public Guid AssignmentId { get; set; }
-        public Steward Steward { get; set; }
+        public virtual Steward Steward { get; set; }
         
         // Possible assignments
 #nullable enable
-        public Industry? Industry { get; set; }
-        public Development? Development { get; set; }
-        public Fief? Fief { get; set; }
-        public Market? Market { get; set; }
-        public Port? Port { get; set; }
-        public Shipyard? Shipyard { get; set; }
+        public virtual Industry? Industry { get; set; }
+        public virtual Development? Development { get; set; }
+        public virtual Fief? Fief { get; set; }
+        public virtual Market? Market { get; set; }
+        public virtual Port? Port { get; set; }
+        public virtual Shipyard? Shipyard { get; set; }
 #nullable disable
     }
 }

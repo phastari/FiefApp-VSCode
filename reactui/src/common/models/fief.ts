@@ -15,21 +15,6 @@ import { ISteward } from "../../services/useStewardsService/types";
 
 export interface IFief {
     fiefId: string;
-    market: IMarket;
-    // assigned
-    steward?: ISteward;
-    port: IPort | null;
-    livingcondition: ILivingcondition;
-    road: IRoad;
-    inheritance: IInheritance;
-    villages: IVillage[];
-    industries: IIndustry[];
-    buildings: IBuilding[];
-    boats: IBoat[];
-    residents: IResident[];
-    soldiers: ISoldier[];
-    employees: IEmployee[];
-    builders: IBuilder[];
     name: string;
     acres: number;
     farmlandAcres: number;
@@ -49,6 +34,21 @@ export interface IFief {
     healthcareDevelopmentLevel: number;
     militaryDevelopmentLevel: number;
     seafaringDevelopmentLevel: number;
+    market: IMarket;
+    // assigned
+    steward?: ISteward;
+    port: IPort | null;
+    livingcondition: ILivingcondition;
+    road: IRoad;
+    inheritance: IInheritance;
+    villages: IVillage[];
+    industries: IIndustry[];
+    buildings: IBuilding[];
+    boats: IBoat[];
+    residents: IResident[];
+    soldiers: ISoldier[];
+    employees: IEmployee[];
+    builders: IBuilder[];
 }
 
 export interface IFiefs {

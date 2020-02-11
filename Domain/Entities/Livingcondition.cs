@@ -8,7 +8,7 @@ namespace Domain.Entities
     {
         public Guid LivingconditionId { get; set; }
         #nullable enable
-        public LivingconditionType? LivingconditionType { get; set; }
+        public virtual LivingconditionType? LivingconditionType { get; set; }
         public int? LivingconditionTypeId { get; set; }
         #nullable disable
         public virtual Fief Fief { get; set; }

@@ -13,15 +13,15 @@ namespace Domain.Entities
         }
 
         public Guid BoatId { get; set; }
-        public BoatType BoatType { get; set; }
+        public virtual BoatType BoatType { get; set; }
         public int BoatTypeId { get; set; }
 #nullable enable
-        public Boatbuilder? Boatbuilder { get; set; }
-        public Cargo? Cargo { get; set; }
-        public Shipyard? Shipyard { get; set; }
+        public virtual Boatbuilder? Boatbuilder { get; set; }
+        public virtual Cargo? Cargo { get; set; }
+        public virtual Shipyard? Shipyard { get; set; }
 #nullable disable
         public virtual Fief Fief { get; set; }
-        public ICollection<Soldier> Soldiers { get; set; }
+        public virtual ICollection<Soldier> Soldiers { get; set; }
         public string Name { get; set; }
         public int Length { get; set; }
         public decimal Width { get; set; }

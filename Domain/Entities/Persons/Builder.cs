@@ -6,7 +6,7 @@ namespace Domain.Entities.Persons
     {
         public Guid BuilderId { get; set; }
         public Guid? AssignmentId { get; set; }
-        public Fief Fief { get; set; }
+        public virtual Fief Fief { get; set; }
         public string Name { get; set; }
         public int Skill { get; set; }
         public int Resources { get; set; }

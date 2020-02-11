@@ -12,10 +12,10 @@ namespace Domain.Entities.Persons
 
         public Guid MerchantId { get; set; }
 #nullable enable
-        public Cargo? Cargo { get; set; }
+        public virtual Cargo? Cargo { get; set; }
 #nullable disable
-        public Port Port { get; set; }
-        public ICollection<Soldier> Soldiers { get; set; }
+        public virtual Port Port { get; set; }
+        public virtual ICollection<Soldier> Soldiers { get; set; }
         public string Status { get; set; }
         public string Name { get; set; }
         public int Skill { get; set; }

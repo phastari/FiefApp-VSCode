@@ -7,13 +7,13 @@ namespace Domain.Entities.Persons
     public class Soldier
     {
         public Guid SoldierId { get; set; }
-        public Fief Fief { get; set; }
+        public virtual Fief Fief { get; set; }
         public string Name { get; set; }
         public int Skill { get; set; }
         public int Resources { get; set; }
         public int Loyalty { get; set; }
         public int Age { get; set; }
-        public SoldierType SoldierType { get; set; }
+        public virtual SoldierType SoldierType { get; set; }
         public int SoldierTypeId { get; set; }
 #nullable enable
         public virtual Merchant? Merchant { get; set; }

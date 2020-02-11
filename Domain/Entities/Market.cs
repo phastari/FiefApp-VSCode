@@ -14,13 +14,13 @@ namespace Domain.Entities
 
         public Guid MarketId { get; set; }
         #nullable enable
-        public Assignment? Assignment { get; set; }
+        public virtual Assignment? Assignment { get; set; }
         public Guid? AssignmentId { get; set; }
         #nullable disable
-        public ICollection<Merchant> Merchants { get; set; }
+        public virtual ICollection<Merchant> Merchants { get; set; }
         public virtual Fief Fief { get; set; }
         public Guid FiefId {get; set;}
-        public ICollection<Soldier> Soldiers { get; set; }
+        public virtual ICollection<Soldier> Soldiers { get; set; }
         public string Name { get; set; }
         public int DevelopmentLevel { get; set; }
         public int Merchandise { get; set; }

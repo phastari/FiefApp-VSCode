@@ -8,10 +8,10 @@ namespace Domain.Entities
     {
         public Guid BuildingId { get; set; }
 #nullable enable
-        public Builder? Builder { get; set; }
+        public virtual Builder? Builder { get; set; }
 #nullable disable
         public virtual Fief Fief { get; set; }
-        public BuildingType BuildingType { get; set; }
+        public virtual BuildingType BuildingType { get; set; }
         public string Type { get; set; }
         public int Amount { get; set; }
         public int WoodworkThisYear { get; set; }

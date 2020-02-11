@@ -13,9 +13,9 @@ namespace Domain.Entities.Industries
             IndustryType = "Mine";
         }
 
-        public MineType MineType { get; set; }
+        public virtual MineType MineType { get; set; }
         public int MineTypeId { get; set; }
-        public ICollection<Soldier> Soldiers { get; set; }
+        public virtual ICollection<Soldier> Soldiers { get; set; }
         public string Type { get; set; }
         public int Silver { get; set; }
         public int Luxury { get; set; }

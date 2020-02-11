@@ -5,7 +5,7 @@ namespace Domain.Entities
     public class Village
     {
         public Guid VillageId { get; set; }
-        public Fief Fief { get; set; }
+        public virtual Fief Fief { get; set; }
         public string Name { get; set; }
         public int Serfdoms { get; set; }
         public int Farmers { get; set; }

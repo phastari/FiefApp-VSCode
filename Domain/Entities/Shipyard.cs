@@ -14,13 +14,13 @@ namespace Domain.Entities
 
         public Guid ShipyardId { get; set; }
         #nullable enable
-        public Assignment? Assignment { get; set; }
+        public virtual Assignment? Assignment { get; set; }
         public Guid? AssignmentId { get; set; }
         #nullable disable
-        public Port Port { get; set; }
+        public virtual Port Port { get; set; }
         public Guid PortId { get; set; }
-        public ICollection<Boatbuilder> Boatbuilders { get; set; }
-        public ICollection<Boat> Boats { get; set; }
+        public virtual ICollection<Boatbuilder> Boatbuilders { get; set; }
+        public virtual ICollection<Boat> Boats { get; set; }
         public string Name { get; set; }
         public int DevelopmentLevel { get; set; }
         public bool IsBeingDeveloped { get; set; }

@@ -13,9 +13,9 @@ namespace Domain.Entities.Industries
             IndustryType = "Quarry";
         }
 
-        public QuarryType QuarryType { get; set; }
+        public virtual QuarryType QuarryType { get; set; }
         public int QuarryTypeId { get; set; }
-        public ICollection<Soldier> Soldiers { get; set; }
+        public virtual ICollection<Soldier> Soldiers { get; set; }
         public string Type { get; set; }
         public int Stone { get; set; }
         public bool IsFirstYear { get; set; }
