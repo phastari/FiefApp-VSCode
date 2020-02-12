@@ -41,6 +41,7 @@ export interface IShortFief {
 export interface IShortInheritance {
     inheritanceId: string;
     type: string;
+    description: string;
 }
 
 export interface IShortRoad {

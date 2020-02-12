@@ -60,7 +60,8 @@ namespace Application.Fiefs.Queries.GetFiefsList
                 inheritances.Add(new ShortInheritance
                 {
                     InheritanceTypeId = inheritance.InheritanceTypeId,
-                    Type = inheritance.Type
+                    Type = inheritance.Type,
+                    Description = inheritance.Description
                 });
             };
 

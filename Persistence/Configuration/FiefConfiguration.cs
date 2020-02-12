@@ -12,7 +12,7 @@ namespace Persistence.Configuration
                 .HasColumnName("FiefId")
                 .ValueGeneratedOnAdd();
 
-            builder.Property(e => e.Name).HasMaxLength(60);
+            builder.Property(e => e.Name).HasMaxLength(60).HasDefaultValue("Ny förläning");
             builder.Property(e => e.AnimalHusbandryDevelopmentLevel).HasDefaultValue(1);
             builder.Property(e => e.AgriculturalDevelopmentLevel).HasDefaultValue(1);
             builder.Property(e => e.FishingDevelopmentLevel).HasDefaultValue(1);
