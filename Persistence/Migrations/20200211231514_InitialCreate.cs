@@ -267,6 +267,7 @@ namespace Persistence.Migrations
                     FarmlandAcres = table.Column<int>(nullable: false),
                     PastureAcres = table.Column<int>(nullable: false),
                     WoodlandAcres = table.Column<int>(nullable: false),
+                    FellingAcres = table.Column<int>(nullable: false),
                     UnusableAcres = table.Column<int>(nullable: false),
                     AnimalHusbandryQuality = table.Column<int>(nullable: false),
                     AgriculturalQuality = table.Column<int>(nullable: false),

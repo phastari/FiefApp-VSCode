@@ -36,20 +36,19 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery(Name = "0")] string id)
+        public async Task<IActionResult> Get([FromQuery(Name = "0")] string fiefId)
         {
-            Console.WriteLine($"ID: {id}");
-            var vm = await Mediator.Send(new GetDetailedFiefQuery() { Id = id });
+            var vm = await Mediator.Send(new GetDetailedFiefQuery() { FiefId = fiefId });
 
             return Ok(vm.Fief);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetList()
+        public async Task<IActionResult> Init([FromQuery(Name = "0")] string gameSessionId)
         {
-            var result = await Mediator.Send(new GetFiefsListQuery());
+            var vm = await Mediator.Send(new GetFiefsListQuery() { GameSessionId = gameSessionId });
 
-            return Ok(result.Fiefs);
+            return Ok(vm);
         }
     }
 }

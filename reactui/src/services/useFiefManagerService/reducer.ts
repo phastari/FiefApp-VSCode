@@ -6,10 +6,19 @@ export function fiefManagerReducer(state: FiefManagerState, action: FiefManagerA
             return { ...state, status: FiefManagerStatuses.LOADING }
         }
         case FiefManagerActionTypes.FIEFMANAGER_LOAD_FIEF_SUCCESS: {
-        return { ...state, status: FiefManagerStatuses.LOADED, fief: action.fief, fiefs: [...state.fiefs, action.fief], fiefId: action.fief.fiefId };
+            return { ...state, status: FiefManagerStatuses.LOADED, fief: action.fief, fiefs: [...state.fiefs, action.fief], fiefId: action.fief.fiefId };
         }
         case FiefManagerActionTypes.FIEFMANAGER_LOAD_FIEF_FAILURE: {
-        return { ...state, status: FiefManagerStatuses.ERROR, errors: action.errors };
+            return { ...state, status: FiefManagerStatuses.ERROR, errors: action.errors };
+        }
+        case FiefManagerActionTypes.FIEFMANAGER_REQUEST_INITIALIZE: {
+            return { ...state, status: FiefManagerStatuses.UPDATE };
+        }
+        case FiefManagerActionTypes.FIEFMANAGER_INITIALIZE_SUCCESS: {
+            return { ...state, status: FiefManagerStatuses.INITIALIZED, fiefsList: action.init.fiefs, roadsList: action.init.roads, inheritancesList: action.init.inheritances, fiefId: action.init.fiefId }
+        }
+        case FiefManagerActionTypes.FIEFMANAGER_INITIALIZE_FAILURE: {
+            return { ...state, status: FiefManagerStatuses.ERROR, errors: action.errors }
         }
         default:
         return state;

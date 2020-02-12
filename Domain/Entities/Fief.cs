@@ -49,6 +49,7 @@ namespace Domain.Entities
         public int FarmlandAcres { get; set; }
         public int PastureAcres { get; set; }
         public int WoodlandAcres { get; set; }
+        public int FellingAcres { get; set; }
         public int UnusableAcres { get; set; }
         public int AnimalHusbandryQuality { get; set; }
         public int AgriculturalQuality { get; set; }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Application.Common.Mappings;
 using Application.Common.Models;
 using AutoMapper;
@@ -13,6 +14,7 @@ namespace Application.Fiefs.Queries.GetDetailedFief
         public int FarmlandAcres { get; set; }
         public int PastureAcres { get; set; }
         public int WoodlandAcres { get; set; }
+        public int FellingAcres { get; set; }
         public int UnusableAcres { get; set; }
         public int AnimalHusbandryQuality { get; set; }
         public int AgriculturalQuality { get; set; }
@@ -28,9 +30,9 @@ namespace Application.Fiefs.Queries.GetDetailedFief
         public int MilitaryDevelopmentLevel { get; set; }
         public int SeafaringDevelopmentLevel { get; set; }
         public MarketLookupDto Market { get; set; }
-        public string Road { get; set; }
-        public string Livingcondition { get; set; }
-        public string Inheritance { get; set; }
+        public RoadLookupDto Road { get; set; }
+        public LivingconditionLookupDto Livingcondition { get; set; }
+        public InheritanceLookupDto Inheritance { get; set; }
 
         public void Mapping(Profile profile)
         {
@@ -41,6 +43,7 @@ namespace Application.Fiefs.Queries.GetDetailedFief
                 .ForMember(d => d.FarmlandAcres, opt => opt.MapFrom(s => s.FarmlandAcres))
                 .ForMember(d => d.PastureAcres, opt => opt.MapFrom(s => s.PastureAcres))
                 .ForMember(d => d.WoodlandAcres, opt => opt.MapFrom(s => s.WoodlandAcres))
+                .ForMember(d => d.FellingAcres, opt => opt.MapFrom(s => s.FellingAcres))
                 .ForMember(d => d.UnusableAcres, opt => opt.MapFrom(s => s.UnusableAcres))
                 .ForMember(d => d.AnimalHusbandryQuality, opt => opt.MapFrom(s => s.AnimalHusbandryQuality))
                 .ForMember(d => d.AgriculturalQuality, opt => opt.MapFrom(s => s.AgriculturalQuality))
@@ -54,10 +57,7 @@ namespace Application.Fiefs.Queries.GetDetailedFief
                 .ForMember(d => d.EducationDevelopmentLevel, opt => opt.MapFrom(s => s.EducationDevelopmentLevel))
                 .ForMember(d => d.HealthcareDevelopmentLevel, opt => opt.MapFrom(s => s.HealthcareDevelopmentLevel))
                 .ForMember(d => d.MilitaryDevelopmentLevel, opt => opt.MapFrom(s => s.MilitaryDevelopmentLevel))
-                .ForMember(d => d.SeafaringDevelopmentLevel, opt => opt.MapFrom(s => s.SeafaringDevelopmentLevel))
-                .ForMember(d => d.Road, opt => opt.MapFrom(s => s.Road.RoadType.Type))
-                .ForMember(d => d.Livingcondition, opt => opt.MapFrom(s => s.Livingcondition.LivingconditionType.Type))
-                .ForMember(d => d.Inheritance, opt => opt.MapFrom(s => s.Inheritance.InheritanceType.Type));
+                .ForMember(d => d.SeafaringDevelopmentLevel, opt => opt.MapFrom(s => s.SeafaringDevelopmentLevel));
         }
     }
 }

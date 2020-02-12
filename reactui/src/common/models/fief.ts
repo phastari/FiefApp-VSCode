@@ -20,6 +20,7 @@ export interface IFief {
     farmlandAcres: number;
     pastureAcres: number;
     woodlandAcres: number;
+    fellingAcres: number;
     unusableAcres: number;
     animalHusbandryQuality: number;
     agriculturalQuality: number;

@@ -1,13 +1,11 @@
 import axios from "../../common/api/apiClient"
 import { IFief } from "../../common/models/fief"
+import { IInitializeFiefManager } from "./types";
 
 export const getFief = async (id: string) => {
-    console.log('action');
-    let response = await axios.get<IFief>('/fief/get', { params: id});
-    console.log(response);
-    return response;
+    return await axios.get<IFief>('/fief/get', { params: id});
 }
 
-export const changeFiefId = (id: string) => {
-    
+export const initializeFiefManager = async (gameSessionId: string) => {
+    return await axios.get<IInitializeFiefManager>('/fief/init', { params: gameSessionId })
 }

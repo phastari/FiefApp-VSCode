@@ -12,7 +12,7 @@ namespace Application.Fiefs.Queries.GetDetailedFief
 {
     public class GetDetailedFiefQuery : IRequest<GetDetailedFiefsListVm>
     {
-        public string Id { get; set; }
+        public string FiefId { get; set; }
     }
 
     public class GetDetailedFiefQueryHandler : IRequestHandler<GetDetailedFiefQuery, GetDetailedFiefsListVm>
@@ -30,39 +30,25 @@ namespace Application.Fiefs.Queries.GetDetailedFief
 
         public async Task<GetDetailedFiefsListVm> Handle(GetDetailedFiefQuery request, CancellationToken cancellationToken)
         {
-            if (Guid.TryParse(request.Id, out Guid id))
+            if (Guid.TryParse(request.FiefId, out Guid id))
             {
                 var fief = await _context.Fiefs.FindAsync(id);
 
-                if (fief == null)
+                if (fief != null) 
                 {
-                    var session = await _context.GameSessions.FindAsync(id);
-
-                    if (session == null)
+                    var vm = new GetDetailedFiefsListVm
                     {
-                        throw new CustomException($"GetDetailedFiefQuery >> Could't find fief or gamesession with (id:{id}).");
-                    }
+                        Fief = _mapper.Map<DetailedFiefLookupDto>(fief)
+                    };
 
-                    fief = _context.Fiefs.Where(o => o.GameSessionId == session.GameSessionId).First();
-
-                    if (fief == null)
-                    {
-                        throw new CustomException($"GetDetailedFiefQuery >> Could not find fief({id}).");
-                    }
+                    return vm;
+                } else 
+                {
+                    throw new CustomException($"GetDetailedFiefQuery >> Could not find fief ({request.FiefId}).");
                 }
-
-                var vm = new GetDetailedFiefsListVm
-                {
-                    Fief = _mapper.Map<DetailedFiefLookupDto>(fief)
-                };
-
-                //vm.Fief.Market = _mapper.Map<MarketLookupDto>(fief.Market);
-                
-
-                return vm;
             }
 
-            throw new CustomException($"GetDetailedFiefQuery >> Could not parse ({request.Id}).");
+            throw new CustomException($"GetDetailedFiefQuery >> Could not parse ({request.FiefId}).");
         }
     }
 

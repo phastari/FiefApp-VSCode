@@ -3,10 +3,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Interfaces;
-using Application.Common.Mappings;
+using Application.Common.Models;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,12 +32,44 @@ namespace Application.Fiefs.Queries.GetFiefsList
         {
             var fiefs = await _context.Fiefs
                 .Where(o => o.GameSessionId.ToString() == request.GameSessionId)
-                .ProjectTo<FiefLookupDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
+
+            var fiefsList = new List<ShortFief>();
+            foreach (var fief in fiefs)
+            {
+                fiefsList.Add(new ShortFief 
+                {
+                    FiefId = fief.FiefId.ToString(),
+                    Name = fief.Name
+                });
+            };
+
+            var roads = new List<ShortRoad>();
+            foreach (var road in _context.RoadTypes)
+            {
+                roads.Add(new ShortRoad
+                {
+                    RoadTypeId = road.RoadTypeId,
+                    Type = road.Type
+                });
+            };
+
+            var inheritances = new List<ShortInheritance>();
+            foreach (var inheritance in _context.InheritanceTypes)
+            {
+                inheritances.Add(new ShortInheritance
+                {
+                    InheritanceTypeId = inheritance.InheritanceTypeId,
+                    Type = inheritance.Type
+                });
+            };
 
             var vm = new GetFiefsListVm
             {
-                Fiefs = fiefs
+                Fiefs = fiefsList,
+                Roads = roads,
+                Inheritances = inheritances,
+                FiefId = fiefsList[0].FiefId
             };
 
             return vm;
@@ -48,19 +78,9 @@ namespace Application.Fiefs.Queries.GetFiefsList
 
     public class GetFiefsListVm
     {
-        public List<FiefLookupDto> Fiefs { get; set; }
-    }
-
-    public class FiefLookupDto : IMapFrom<Fief>
-    {
+        public List<ShortFief> Fiefs { get; set; }
+        public List<ShortRoad> Roads { get; set; }
+        public List<ShortInheritance> Inheritances { get; set; }
         public string FiefId { get; set; }
-        public string Name { get; set; }
-
-        public void Mapping(Profile profile)
-        {
-            profile.CreateMap<Fief, FiefLookupDto>()
-                .ForMember(d => d.FiefId, opt => opt.MapFrom(s => s.FiefId.ToString()))
-                .ForMember(d => d.Name, opt => opt.MapFrom(s => s.Name));
-        }
     }
 }

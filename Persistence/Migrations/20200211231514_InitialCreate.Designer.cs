@@ -10,7 +10,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(FiefAppDbContext))]
-    [Migration("20200211094311_InitialCreate")]
+    [Migration("20200211231514_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -273,6 +273,9 @@ namespace Persistence.Migrations
                         .HasDefaultValue(1);
 
                     b.Property<int>("FarmlandAcres")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FellingAcres")
                         .HasColumnType("int");
 
                     b.Property<int>("FishingDevelopmentLevel")

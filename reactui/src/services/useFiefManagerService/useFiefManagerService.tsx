@@ -1,7 +1,7 @@
 import React, { useEffect, Dispatch, createContext, PropsWithChildren, useReducer, useContext } from 'react';
 import { FiefManagerState, FiefManagerAction, initialFiefManagerState, FiefManagerActionTypes, FiefManagerStatuses } from './types';
 import { fiefManagerReducer } from './reducer';
-import { getFief } from './actions';
+import { initializeFiefManager, getFief } from './actions';
 
 type FiefManagerContextProps = {
   state: FiefManagerState;
@@ -16,8 +16,14 @@ const FiefManagerContext = createContext<FiefManagerContextProps>({
 export const FiefManagerProvider: React.FC<PropsWithChildren<{}>> = (props) => {
   const [state, dispatch] = useReducer(fiefManagerReducer, initialFiefManagerState);
 
+  const initializeLists = async (id: string) => {
+    initializeFiefManager(id)
+    .then(response => {
+      dispatch({ type: FiefManagerActionTypes.FIEFMANAGER_INITIALIZE_SUCCESS, init: response.data });
+    })
+  }
+
   const loadFief = async (id: string) => {
-    console.log('trigger');
     getFief(id)
     .then(response => {
       dispatch({ type: FiefManagerActionTypes.FIEFMANAGER_LOAD_FIEF_SUCCESS, fief: response.data });
@@ -25,9 +31,9 @@ export const FiefManagerProvider: React.FC<PropsWithChildren<{}>> = (props) => {
   }
 
   useEffect(() => {
-    if (state.status !== FiefManagerStatuses.LOADED && state.fiefId === '' && state.gameSessionId !== '') {
-      loadFief(state.gameSessionId);
-    } else if (state.status !== FiefManagerStatuses.LOADED && state.fiefId !== '') {
+    if (state.status === FiefManagerStatuses.UPDATE && state.gameSessionId !== '') {
+      initializeLists(state.gameSessionId);
+    } else if (state.status === FiefManagerStatuses.LOADING && state.fiefId !== '') {
       loadFief(state.fiefId);
     }
   }, [state.status, state.fiefId, state.gameSessionId, state])

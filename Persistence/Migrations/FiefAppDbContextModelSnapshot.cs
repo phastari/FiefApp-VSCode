@@ -273,6 +273,9 @@ namespace Persistence.Migrations
                     b.Property<int>("FarmlandAcres")
                         .HasColumnType("int");
 
+                    b.Property<int>("FellingAcres")
+                        .HasColumnType("int");
+
                     b.Property<int>("FishingDevelopmentLevel")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")

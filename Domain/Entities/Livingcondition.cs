@@ -7,10 +7,10 @@ namespace Domain.Entities
     public class Livingcondition
     {
         public Guid LivingconditionId { get; set; }
-        #nullable enable
+    #nullable enable
         public virtual LivingconditionType? LivingconditionType { get; set; }
         public int? LivingconditionTypeId { get; set; }
-        #nullable disable
+    #nullable disable
         public virtual Fief Fief { get; set; }
         public Guid FiefId { get; set; }
     }
