@@ -22,7 +22,7 @@ namespace Domain.Entities
 #nullable disable
         public virtual Fief Fief { get; set; }
         public virtual ICollection<Soldier> Soldiers { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
         public int Length { get; set; }
         public decimal Width { get; set; }
         public decimal Depth { get; set; }

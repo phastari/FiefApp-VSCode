@@ -10,7 +10,7 @@ namespace Domain.Entities.Industries
         public virtual Assignment? Assignment { get; set; }
         public Guid? AssignmentId { get; set; }
         #nullable disable
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
         public string IndustryType { get; set; }
     }
 }

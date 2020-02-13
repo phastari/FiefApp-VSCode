@@ -21,7 +21,7 @@ namespace Domain.Entities
         public virtual Fief Fief { get; set; }
         public Guid FiefId {get; set;}
         public virtual ICollection<Soldier> Soldiers { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
         public int DevelopmentLevel { get; set; }
         public int Merchandise { get; set; }
         public int IncomeSilver { get; set; }

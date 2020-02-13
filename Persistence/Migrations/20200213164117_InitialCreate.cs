@@ -262,7 +262,7 @@ namespace Persistence.Migrations
                     FiefId = table.Column<Guid>(nullable: false),
                     GameSessionId = table.Column<Guid>(nullable: false),
                     AssignmentId = table.Column<Guid>(nullable: true),
-                    Name = table.Column<string>(maxLength: 60, nullable: true),
+                    Name = table.Column<string>(maxLength: 60, nullable: true, defaultValue: "Ny förläning"),
                     Acres = table.Column<int>(nullable: false),
                     FarmlandAcres = table.Column<int>(nullable: false),
                     PastureAcres = table.Column<int>(nullable: false),
@@ -405,11 +405,7 @@ namespace Persistence.Migrations
                     Subsidiary_Luxury = table.Column<int>(nullable: true),
                     DaysworkThisYear = table.Column<int>(nullable: true),
                     Subsidiary_IsBeingDeveloped = table.Column<bool>(nullable: true),
-                    Subsidiary_DevelopmentId = table.Column<Guid>(nullable: true),
-                    SpringModifier = table.Column<double>(nullable: true),
-                    SummerModifier = table.Column<double>(nullable: true),
-                    FallModifier = table.Column<double>(nullable: true),
-                    WinterModifier = table.Column<double>(nullable: true)
+                    Subsidiary_DevelopmentId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {

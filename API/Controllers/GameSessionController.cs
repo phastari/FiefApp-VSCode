@@ -1,11 +1,9 @@
-using System;
 using System.Threading.Tasks;
 using Application.GameSessions.Commands.CreateGameSession;
 using Application.GameSessions.Commands.DeleteGameSession;
 using Application.GameSessions.Commands.UpdateGameSession;
 using Application.GameSessions.Queries.GetGameSessionsList;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace API.Controllers
 {

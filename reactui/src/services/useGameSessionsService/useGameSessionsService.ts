@@ -21,7 +21,7 @@ const useGameSessionsService = () => {
             .catch(error => {
                 setStatus(GameSessionsStatuses.ERROR);
                 setSessions([]);
-                setErrors(error);
+                setErrors(error.data);
             });
         }
     }, [status, errors]);

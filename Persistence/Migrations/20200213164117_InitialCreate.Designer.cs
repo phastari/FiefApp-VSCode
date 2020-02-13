@@ -10,7 +10,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(FiefAppDbContext))]
-    [Migration("20200211231514_InitialCreate")]
+    [Migration("20200213164117_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -303,8 +303,10 @@ namespace Persistence.Migrations
                         .HasDefaultValue(1);
 
                     b.Property<string>("Name")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(60)")
-                        .HasMaxLength(60);
+                        .HasMaxLength(60)
+                        .HasDefaultValue("Ny förläning");
 
                     b.Property<int>("OreDevelopmentLevel")
                         .ValueGeneratedOnAdd()
@@ -2867,9 +2869,6 @@ namespace Persistence.Migrations
                     b.Property<int>("DevelopmentLevel")
                         .HasColumnType("int");
 
-                    b.Property<double>("FallModifier")
-                        .HasColumnType("float");
-
                     b.Property<bool>("IsBeingDeveloped")
                         .HasColumnName("Subsidiary_IsBeingDeveloped")
                         .HasColumnType("bit");
@@ -2885,17 +2884,8 @@ namespace Persistence.Migrations
                         .HasColumnName("Subsidiary_Silver")
                         .HasColumnType("int");
 
-                    b.Property<double>("SpringModifier")
-                        .HasColumnType("float");
-
                     b.Property<int>("SubsidiaryTypeId")
                         .HasColumnType("int");
-
-                    b.Property<double>("SummerModifier")
-                        .HasColumnType("float");
-
-                    b.Property<double>("WinterModifier")
-                        .HasColumnType("float");
 
                     b.HasIndex("SubsidiaryTypeId");
 

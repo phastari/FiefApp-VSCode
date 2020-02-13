@@ -1,10 +1,9 @@
-using System;
 using System.Threading.Tasks;
 using Application.Fiefs.Commands.CreateFief;
 using Application.Fiefs.Commands.DeleteFief;
 using Application.Fiefs.Commands.UpdateFief;
 using Application.Fiefs.Queries.GetDetailedFief;
-using Application.Fiefs.Queries.GetFiefsList;
+using Application.Fiefs.Queries.InitializeFief;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -46,7 +45,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<IActionResult> Init([FromQuery(Name = "0")] string gameSessionId)
         {
-            var vm = await Mediator.Send(new GetFiefsListQuery() { GameSessionId = gameSessionId });
+            var vm = await Mediator.Send(new InitializeFiefQuery() { GameSessionId = gameSessionId });
 
             return Ok(vm);
         }

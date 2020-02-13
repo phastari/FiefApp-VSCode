@@ -1,13 +1,19 @@
 import React, { Fragment } from "react"
-import { Nav, NavItem } from "reactstrap";
-import { Link } from "@reach/router";
+import { Nav, NavItem, Button } from "reactstrap";
+import { FiefManagerIndex } from "../types";
 
-const SideNav = () => {
+type Props = { setIndex: React.Dispatch<React.SetStateAction<FiefManagerIndex>> };
+
+const SideNav: React.FC<Props> = (props) => {
+
     return (
         <Fragment>
             <Nav vertical>
                <NavItem>
-                   <Link to='/fiefmanager/information'>Information</Link>
+                   <Button onClick={() => props.setIndex(FiefManagerIndex.INFORMATION)}>Information</Button>
+                </NavItem> 
+                <NavItem>
+                   <Button onClick={() => props.setIndex(FiefManagerIndex.STEWARDS)}>Förvaltare</Button>
                 </NavItem> 
             </Nav>
         </Fragment>

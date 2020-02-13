@@ -4,14 +4,14 @@ import { IPort } from "./port";
 import { IRoad } from "./road";
 import { IInheritance } from "./inheritance";
 import { IVillage } from "./village";
-import { IIndustry } from "../../services/useIndustriesService/types";
 import { IBuilding } from "./building";
 import { IBoat } from "./boat";
 import { IResident } from "./resident";
 import { ISoldier } from "./soldier";
 import { IEmployee } from "./employee";
 import { IBuilder } from "./builder";
-import { ISteward } from "../../services/useStewardsService/types";
+import { ISteward } from "./steward";
+import { IIndustry } from "./industry";
 
 export interface IFief {
     fiefId: string;

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Row, Col, Button } from 'reactstrap';
-import { ISteward } from '../../../../services/useStewardsService/types';
+import { ISteward } from '../../../../common/models/steward';
 
 const Steward: React.FC<ISteward> = (props) => {
     return (
@@ -11,7 +11,6 @@ const Steward: React.FC<ISteward> = (props) => {
                 <Col>{ props.skill }</Col>
                 <Col>{ props.loyalty }</Col>
                 <Col>{ props.resources }</Col>
-                <Col>{ props.assignmentId }</Col>
                 <Col>
                     <Button size='sm'>tabort</Button>
                 </Col>

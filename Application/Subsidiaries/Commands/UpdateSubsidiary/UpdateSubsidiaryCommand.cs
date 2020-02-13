@@ -92,26 +92,6 @@ namespace Application.Subsidiaries.Commands.UpdateSubsidiary
                             subsidiary.IsBeingDeveloped = (bool)request.IsBeingDeveloped;
                         }
 
-                        if (request.SpringModifier != subsidiary.SpringModifier && request.SpringModifier != null)
-                        {
-                            subsidiary.SpringModifier = (double)request.SpringModifier;
-                        }
-
-                        if (request.SummerModifier != subsidiary.SummerModifier && request.SummerModifier != null)
-                        {
-                            subsidiary.SummerModifier = (double)request.SummerModifier;
-                        }
-
-                        if (request.FallModifier != subsidiary.FallModifier && request.FallModifier != null)
-                        {
-                            subsidiary.FallModifier = (double)request.FallModifier;
-                        }
-
-                        if (request.WinterModifier != subsidiary.WinterModifier && request.WinterModifier != null)
-                        {
-                            subsidiary.WinterModifier = (double)request.WinterModifier;
-                        }
-
                         await _context.SaveChangesAsync(cancellationToken);
                         return true;
 

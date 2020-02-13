@@ -1,6 +1,6 @@
 import { ISoldier } from "./soldier";
 import { IMerchant } from "./merchant";
-import { ISteward } from "../../services/useStewardsService/types";
+import { ISteward } from "./steward";
 
 export interface IMarket {
     marketId: string;

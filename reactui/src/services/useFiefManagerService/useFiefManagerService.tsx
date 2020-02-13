@@ -31,12 +31,12 @@ export const FiefManagerProvider: React.FC<PropsWithChildren<{}>> = (props) => {
   }
 
   useEffect(() => {
-    if (state.status === FiefManagerStatuses.UPDATE && state.gameSessionId !== '') {
+    if (state.status === FiefManagerStatuses.INITIALIZING && state.gameSessionId !== '') {
       initializeLists(state.gameSessionId);
-    } else if (state.status === FiefManagerStatuses.LOADING && state.fiefId !== '') {
+    } else if (state.status === FiefManagerStatuses.INITIALIZED && state.fiefId !== '') {
       loadFief(state.fiefId);
     }
-  }, [state.status, state.fiefId, state.gameSessionId, state])
+  }, [state])
 
   return <FiefManagerContext.Provider value={{ state, dispatch }} {...props} />;
 }

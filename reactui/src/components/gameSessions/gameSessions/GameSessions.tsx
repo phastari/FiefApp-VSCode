@@ -39,7 +39,7 @@ const GameSessions: React.FC<RouteComponentProps> = (_: RouteComponentProps) => 
 
     const selectSession = async (id: string) => {
         fmService.state.gameSessionId = id;
-        navigate('/fiefmanager/information');
+        navigate('/fiefmanager');
     }
     
     return (

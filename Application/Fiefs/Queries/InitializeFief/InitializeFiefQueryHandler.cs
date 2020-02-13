@@ -5,30 +5,26 @@ using System.Threading.Tasks;
 using Application.Common.Interfaces;
 using Application.Common.Models;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Fiefs.Queries.GetFiefsList
+namespace Application.Fiefs.Queries.InitializeFief
 {
-    public class GetFiefsListQuery : IRequest<GetFiefsListVm>
-    {
-        public string GameSessionId { get; set; }
-    }
-
-    public class GetFiefsListQueryHandler : IRequestHandler<GetFiefsListQuery, GetFiefsListVm>
+    public class InitializeFiefQueryHandler : IRequestHandler<InitializeFiefQuery, InitializeFiefVm>
     {
         private readonly IFiefAppDbContext _context;
         private readonly IMapper _mapper;
         private readonly string _currentUser;
 
-        public GetFiefsListQueryHandler(IFiefAppDbContext context, ICurrentUserService currentUser, IMapper mapper)
+        public InitializeFiefQueryHandler(IFiefAppDbContext context, ICurrentUserService currentUser, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
             _currentUser = currentUser.GetCurrentUsername();
         }
 
-        public async Task<GetFiefsListVm> Handle(GetFiefsListQuery request, CancellationToken cancellationToken)
+        public async Task<InitializeFiefVm> Handle(InitializeFiefQuery request, CancellationToken cancellationToken)
         {
             var fiefs = await _context.Fiefs
                 .Where(o => o.GameSessionId.ToString() == request.GameSessionId)
@@ -65,23 +61,27 @@ namespace Application.Fiefs.Queries.GetFiefsList
                 });
             };
 
-            var vm = new GetFiefsListVm
+            var industries = await _context.Industries
+                .Where(o => o.Fief.GameSessionId.ToString() == request.GameSessionId)
+                .ProjectTo<IndustryLookupDto>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+
+            var stewards = await _context.Stewards
+                .Where(o => o.GameSessionId.ToString() == request.GameSessionId)
+                .ProjectTo<StewardLookupDto>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+
+            var vm = new InitializeFiefVm
             {
                 Fiefs = fiefsList,
                 Roads = roads,
                 Inheritances = inheritances,
-                FiefId = fiefsList[0].FiefId
+                FiefId = fiefsList[0].FiefId,
+                Industries = industries,
+                Stewards = stewards
             };
 
             return vm;
         }
-    }
-
-    public class GetFiefsListVm
-    {
-        public List<ShortFief> Fiefs { get; set; }
-        public List<ShortRoad> Roads { get; set; }
-        public List<ShortInheritance> Inheritances { get; set; }
-        public string FiefId { get; set; }
     }
 }

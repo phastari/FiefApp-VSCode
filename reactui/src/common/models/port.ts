@@ -2,7 +2,7 @@ import { IMerchant } from "./merchant";
 import { IBoat } from "./boat";
 import { ISoldier } from "./soldier";
 import { IShipyard } from "./shipyard";
-import { ISteward } from "../../services/useStewardsService/types";
+import { ISteward } from "./steward";
 
 export interface IPort {
     portId: string;

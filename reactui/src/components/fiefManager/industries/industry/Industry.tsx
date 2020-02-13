@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Row, Col, Button } from 'reactstrap';
-import { IIndustry } from '../../../../services/useIndustriesService/types';
 import Felling from '../felling/Felling';
+import { IIndustry } from '../../../../common/models/industry';
 
 const Industry: React.FC<IIndustry> = (props) => {
     return (
@@ -21,7 +21,8 @@ const Industry: React.FC<IIndustry> = (props) => {
                         amountLandclearingOfFelling={props.amountLandclearingOfFelling}
                         amountFelling={props.amountFelling}
                         amountClearUseless={props.amountClearUseless}
-                        isBeingDeveloped={props.isBeingDeveloped} />
+                        isBeingDeveloped={props.isBeingDeveloped}
+                        steward={props.steward} />
                 }
                 </Col>
             </Row>

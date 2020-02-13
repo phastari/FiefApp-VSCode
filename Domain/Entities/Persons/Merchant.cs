@@ -17,7 +17,7 @@ namespace Domain.Entities.Persons
         public virtual Port Port { get; set; }
         public virtual ICollection<Soldier> Soldiers { get; set; }
         public string Status { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
         public int Skill { get; set; }
         public int Resources { get; set; }
         public int Loyalty { get; set; }

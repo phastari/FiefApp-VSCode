@@ -44,7 +44,7 @@ namespace Domain.Entities
         public virtual ICollection<Soldier> Soldiers { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
         public virtual ICollection<Builder> Builders { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
         public int Acres { get; set; }
         public int FarmlandAcres { get; set; }
         public int PastureAcres { get; set; }

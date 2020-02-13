@@ -15,7 +15,7 @@ namespace Domain.Entities
             Created = DateTime.UtcNow;
         }
         public Guid GameSessionId { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
         public virtual ICollection<Fief> Fiefs { get; set; }
         public virtual ICollection<Steward> Stewards { get; set; }
         public string User { get; set; }

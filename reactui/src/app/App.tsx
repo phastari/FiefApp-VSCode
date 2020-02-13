@@ -7,8 +7,8 @@ import { Router } from '@reach/router';
 import Home from '../components/home/Home';
 import TopNavBar from '../components/topNavBar/TopNavBar';
 import { AuthenticationActionTypes } from '../services/useAuthenticationService/types';
-import Information from '../components/fiefManager/information/Information';
 import { FiefManagerProvider } from '../services/useFiefManagerService/useFiefManagerService';
+import FiefManager from '../components/fiefManager/FiefManager';
 
 const App = () => {
   const {
@@ -51,7 +51,7 @@ const App = () => {
       <Router>
         <Home default path='/'/>
         <GameSessions path='gamesessions' />
-        <Information path='fiefmanager/information' />
+        <FiefManager path='fiefmanager' />
       </Router>
     </Fragment>
   );

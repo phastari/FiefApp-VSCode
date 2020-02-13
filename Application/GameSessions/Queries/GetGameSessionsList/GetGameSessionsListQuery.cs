@@ -15,17 +15,16 @@ namespace Application.GameSessions.Queries.GetGameSessionsList
 {
     public class GetGameSessionsListQuery : IRequest<GetGameSessionsListVm>
     {
-
     }
 
-    public class CurrentUserQuerryHandler : IRequestHandler<GetGameSessionsListQuery, GetGameSessionsListVm>
+    public class GetGameSessionsListQueryHandler : IRequestHandler<GetGameSessionsListQuery, GetGameSessionsListVm>
     {
         private readonly IUserManagerService _userManager;
         private readonly IFiefAppDbContext _context;
         private readonly IMapper _mapper;
         private readonly string _currentUser;
 
-        public CurrentUserQuerryHandler(IUserManagerService userManager, ICurrentUserService currentUser, IFiefAppDbContext context, IMapper mapper)
+        public GetGameSessionsListQueryHandler(IUserManagerService userManager, ICurrentUserService currentUser, IFiefAppDbContext context, IMapper mapper)
         {
             _userManager = userManager;
             _context = context;

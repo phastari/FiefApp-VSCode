@@ -3,7 +3,7 @@ import { IBoat } from "./boat";
 import { IMarket } from "./market";
 import { IPort } from "./port";
 import { IRoad } from "./road";
-import { IIndustry } from "../../services/useIndustriesService/types";
+import { IIndustry } from "./industry";
 
 export interface ISoldier {
     soldierId: string;

@@ -5,5 +5,10 @@ export interface ISteward {
     skill: number;
     loyalty: number;
     resources: number;
-    assignmentId: string;
+    industryId: string | null;
+    developmentId: string | null;
+    fiefId: string | null;
+    marketId: string | null;
+    portId: string | null;
+    shipyardId: string | null;
 }

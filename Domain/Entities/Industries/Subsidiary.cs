@@ -19,9 +19,5 @@ namespace Domain.Entities.Industries
         public int DaysworkThisYear { get; set; }
         public bool IsBeingDeveloped { get; set; }
         public Guid? DevelopmentId { get; set; }
-        public double SpringModifier { get; set; }
-        public double SummerModifier { get; set; }
-        public double FallModifier { get; set; }
-        public double WinterModifier { get; set; }
     }
 }

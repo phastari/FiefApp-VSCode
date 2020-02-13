@@ -1,5 +1,5 @@
 import { ISoldier } from "./soldier";
-import { ISteward } from "../../services/useStewardsService/types";
+import { ISteward } from "./steward";
 
 export interface IIndustry {
     industryId: string;

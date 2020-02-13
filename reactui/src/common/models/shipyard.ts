@@ -1,6 +1,6 @@
-import { ISteward } from "../../services/useStewardsService/types";
 import { IBoatbuilder } from "./boatbuilder";
 import { IBoat } from "./boat";
+import { ISteward } from "./steward";
 
 export interface IShipyard {
     shipyardId: string;

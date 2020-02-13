@@ -1,5 +1,4 @@
 using System;
-using Domain.Entities.Industries;
 
 namespace Domain.Entities.Persons
 {
@@ -11,8 +10,9 @@ namespace Domain.Entities.Persons
         }
         
         public Guid StewardId { get; set; }
-        public virtual Fief Fief { get; set; }
-        public string Name { get; set; }
+        public virtual GameSession GameSession { get; set; }
+        public Guid GameSessionId { get; set; }
+        public string Name { get; set; } = "";
         public int Skill { get; set; }
         public int Resources { get; set; }
         public int Loyalty { get; set; }

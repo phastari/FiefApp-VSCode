@@ -21,7 +21,7 @@ namespace Domain.Entities
         public Guid PortId { get; set; }
         public virtual ICollection<Boatbuilder> Boatbuilders { get; set; }
         public virtual ICollection<Boat> Boats { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
         public int DevelopmentLevel { get; set; }
         public bool IsBeingDeveloped { get; set; }
         public int IncomeSilver { get; set; }

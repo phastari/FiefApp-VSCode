@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Row, Col, Button } from 'reactstrap';
-import { IIndustry } from '../../../../services/useIndustriesService/types';
+import { IIndustry } from '../../../../common/models/industry';
 
 const Felling: React.FC<IIndustry> = (props) => {
     return (

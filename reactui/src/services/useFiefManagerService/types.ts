@@ -1,6 +1,9 @@
 import { IFief } from "../../common/models/fief";
+import { IIndustry } from "../../common/models/industry";
+import { ISteward } from "../../common/models/steward";
 
 export enum FiefManagerStatuses {
+    'INITIAL',
     'INITIALIZING',
     'INITIALIZED',
     'LOADING',
@@ -19,6 +22,8 @@ export interface FiefManagerState {
     fiefsList: IShortFief[];
     roadsList: IShortRoad[];
     inheritancesList: IShortInheritance[];
+    stewards: ISteward[];
+    industries: IIndustry[];
 }
 
 export const initialFiefManagerState: FiefManagerState = {
@@ -26,11 +31,13 @@ export const initialFiefManagerState: FiefManagerState = {
     gameSessionId: '',
     fief: null,
     fiefs: [],
-    status: FiefManagerStatuses.INITIALIZING,
+    status: FiefManagerStatuses.INITIAL,
     errors: '',
     fiefsList: [],
     roadsList: [],
-    inheritancesList: []
+    inheritancesList: [],
+    stewards: [],
+    industries: []
 }
 
 export interface IShortFief {
@@ -54,6 +61,8 @@ export interface IInitializeFiefManager {
     roads: IShortRoad[];
     inheritances: IShortInheritance[];
     fiefId: string;
+    industries: IIndustry[];
+    stewards: ISteward[];
 }
 
 export type FiefManagerAction = 

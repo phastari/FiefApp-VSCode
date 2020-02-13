@@ -12,7 +12,7 @@ namespace Domain.Entities
 #nullable disable
         public virtual Fief Fief { get; set; }
         public virtual BuildingType BuildingType { get; set; }
-        public string Type { get; set; }
+        public string Type { get; set; } = "";
         public int Amount { get; set; }
         public int WoodworkThisYear { get; set; }
         public int StoneworkThisYear { get; set; }
