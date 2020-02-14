@@ -10,7 +10,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(FiefAppDbContext))]
-    [Migration("20200213164117_InitialCreate")]
+    [Migration("20200213211220_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -778,10 +778,7 @@ namespace Persistence.Migrations
                     b.Property<Guid>("AssignmentId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("FiefId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("GameSessionId")
+                    b.Property<Guid>("GameSessionId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Loyalty")
@@ -800,8 +797,6 @@ namespace Persistence.Migrations
 
                     b.HasIndex("AssignmentId")
                         .IsUnique();
-
-                    b.HasIndex("FiefId");
 
                     b.HasIndex("GameSessionId");
 
@@ -3112,13 +3107,11 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.Fief", "Fief")
-                        .WithMany()
-                        .HasForeignKey("FiefId");
-
-                    b.HasOne("Domain.Entities.GameSession", null)
+                    b.HasOne("Domain.Entities.GameSession", "GameSession")
                         .WithMany("Stewards")
-                        .HasForeignKey("GameSessionId");
+                        .HasForeignKey("GameSessionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Entities.Port", b =>

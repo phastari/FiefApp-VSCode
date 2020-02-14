@@ -1,14 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Application.Common.Exceptions;
 using Application.Common.Interfaces;
-using Domain.Entities;
-using Domain.Entities.Persons;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace Application.Fiefs.Commands.DeleteFief
 {
@@ -40,14 +34,16 @@ namespace Application.Fiefs.Commands.DeleteFief
                         _context.Fiefs.Remove(fief);
                         await _context.SaveChangesAsync(cancellationToken);
 
-                        throw new CustomException($"DeleteFiefCommand >> Unauthorized delete!");
+                        return true;
                     }
 
-                    throw new CustomException($"DeleteFiefCommand >> Fief({request.FiefId}) could not be found!");
+                    // FiefId could not be found!");
+                    return false;
                 }
                 else
                 {
-                    throw new CustomException($"DeleteFiefCommand >> Could not parse '{request.FiefId}' to a valid Guid!");
+                    // Could not parse FiefId to a valid Guid.
+                    return false;
                 }
             }
         }

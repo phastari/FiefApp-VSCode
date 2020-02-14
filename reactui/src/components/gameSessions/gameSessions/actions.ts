@@ -18,7 +18,7 @@ export const createGameSession = async () => {
 
 export const deleteGameSession = async (gameSessionId: string) => {
     try {
-        const response = await axios.post<boolean>('/gamesession/delete', {gameSessionId: gameSessionId});
+        const response = await axios.post<boolean>('/gamesession/delete', { gameSessionId: gameSessionId });
         return response.data;
     } catch (err) {
         if (err && err.response) {

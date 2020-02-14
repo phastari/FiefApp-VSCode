@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Application.Fiefs.Commands.CreateFief;
 using Application.Fiefs.Commands.DeleteFief;
 using Application.Fiefs.Commands.UpdateFief;
-using Application.Fiefs.Queries.GetDetailedFief;
+using Application.Fiefs.Queries.GetFief;
 using Application.Fiefs.Queries.InitializeFief;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,9 +19,9 @@ namespace API.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> Delete([FromBody] DeleteFiefCommand command)
+        public async Task<IActionResult> Delete([FromQuery(Name = "0")] string fiefId)
         {
-            var vm = await Mediator.Send(command);
+            var vm = await Mediator.Send(new DeleteFiefCommand() { FiefId = fiefId });
 
             return Ok(vm);
         }
@@ -37,7 +37,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery(Name = "0")] string fiefId)
         {
-            var vm = await Mediator.Send(new GetDetailedFiefQuery() { FiefId = fiefId });
+            var vm = await Mediator.Send(new GetFiefQuery() { FiefId = fiefId });
 
             return Ok(vm.Fief);
         }

@@ -256,6 +256,36 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Stewards",
+                columns: table => new
+                {
+                    StewardId = table.Column<Guid>(nullable: false),
+                    GameSessionId = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Skill = table.Column<int>(nullable: false),
+                    Resources = table.Column<int>(nullable: false),
+                    Loyalty = table.Column<int>(nullable: false),
+                    Age = table.Column<int>(nullable: false),
+                    AssignmentId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Stewards", x => x.StewardId);
+                    table.ForeignKey(
+                        name: "FK_Stewards_Assignments_AssignmentId",
+                        column: x => x.AssignmentId,
+                        principalTable: "Assignments",
+                        principalColumn: "AssignmentId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Stewards_GameSessions_GameSessionId",
+                        column: x => x.GameSessionId,
+                        principalTable: "GameSessions",
+                        principalColumn: "GameSessionId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Fiefs",
                 columns: table => new
                 {
@@ -607,43 +637,6 @@ namespace Persistence.Migrations
                         principalTable: "RoadTypes",
                         principalColumn: "RoadTypeId",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Stewards",
-                columns: table => new
-                {
-                    StewardId = table.Column<Guid>(nullable: false),
-                    FiefId = table.Column<Guid>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    Skill = table.Column<int>(nullable: false),
-                    Resources = table.Column<int>(nullable: false),
-                    Loyalty = table.Column<int>(nullable: false),
-                    Age = table.Column<int>(nullable: false),
-                    AssignmentId = table.Column<Guid>(nullable: false),
-                    GameSessionId = table.Column<Guid>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Stewards", x => x.StewardId);
-                    table.ForeignKey(
-                        name: "FK_Stewards_Assignments_AssignmentId",
-                        column: x => x.AssignmentId,
-                        principalTable: "Assignments",
-                        principalColumn: "AssignmentId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Stewards_Fiefs_FiefId",
-                        column: x => x.FiefId,
-                        principalTable: "Fiefs",
-                        principalColumn: "FiefId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Stewards_GameSessions_GameSessionId",
-                        column: x => x.GameSessionId,
-                        principalTable: "GameSessions",
-                        principalColumn: "GameSessionId",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -1413,11 +1406,6 @@ namespace Persistence.Migrations
                 table: "Stewards",
                 column: "AssignmentId",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Stewards_FiefId",
-                table: "Stewards",
-                column: "FiefId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Stewards_GameSessionId",

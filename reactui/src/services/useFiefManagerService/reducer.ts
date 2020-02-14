@@ -6,7 +6,7 @@ export function fiefManagerReducer(state: FiefManagerState, action: FiefManagerA
             return { ...state, status: FiefManagerStatuses.LOADING }
         }
         case FiefManagerActionTypes.FIEFMANAGER_LOAD_FIEF_SUCCESS: {
-            return { ...state, status: FiefManagerStatuses.LOADED, fief: action.fief, fiefs: [...state.fiefs, action.fief], fiefId: action.fief.fiefId };
+            return { ...state, status: FiefManagerStatuses.LOADED, fief: action.fief, fiefId: action.fief.fiefId };
         }
         case FiefManagerActionTypes.FIEFMANAGER_LOAD_FIEF_FAILURE: {
             return { ...state, status: FiefManagerStatuses.ERROR, errors: action.errors };

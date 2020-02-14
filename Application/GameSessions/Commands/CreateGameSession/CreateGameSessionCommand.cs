@@ -38,6 +38,11 @@ namespace Application.GameSessions.Commands.CreateGameSession
 
                 var count = _context.GameSessions.Where(o => o.User == gameSession.User).Count();
                 gameSession.Name = $"Session{++count}";
+                var fief = gameSession.Fiefs.FirstOrDefault();
+                if (fief != null)
+                {
+                    fief.Name = "Förläning 1";
+                }
 
                 _context.GameSessions.Add(gameSession);
                 await _context.SaveChangesAsync(cancellationToken);

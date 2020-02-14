@@ -1,12 +1,10 @@
-using System.Collections.Generic;
 using Application.Common.Mappings;
-using Application.Common.Models;
 using AutoMapper;
 using Domain.Entities;
 
-namespace Application.Fiefs.Queries.GetDetailedFief
+namespace Application.Common.Models
 {
-    public class DetailedFiefLookupDto : IMapFrom<Fief>
+    public class FiefLookupDto : IMapFrom<Fief>
     {
         public string FiefId { get; set; }
         public string Name { get; set; }
@@ -36,7 +34,7 @@ namespace Application.Fiefs.Queries.GetDetailedFief
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Fief, DetailedFiefLookupDto>()
+            profile.CreateMap<Fief, FiefLookupDto>()
                 .ForMember(d => d.FiefId, opt => opt.MapFrom(s => s.FiefId.ToString()))
                 .ForMember(d => d.Name, opt => opt.MapFrom(s => s.Name))
                 .ForMember(d => d.Acres, opt => opt.MapFrom(s => s.Acres))

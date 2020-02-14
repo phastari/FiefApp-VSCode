@@ -1,9 +1,8 @@
-import React, { Fragment, FC, useState } from 'react';
+import React, { Fragment, FC } from 'react';
 import Steward from '../steward/Steward';
 import { ISteward } from '../../../../common/models/steward';
 import { IIndustry } from '../../../../common/models/industry';
 import { Button } from 'reactstrap';
-import { createSteward } from './actions';
 
 interface PropsFromFiefManager {
     gameSessionId: string;
@@ -11,15 +10,9 @@ interface PropsFromFiefManager {
     industries: IIndustry[];
 }
 
-const Stewards: FC<PropsFromFiefManager> = (props) => {
-    const [reload, setReload] = useState(0);
+type AllProps = PropsFromFiefManager & { handleAddSteward: any };
 
-    const handleAddSteward = async () => {
-        let steward = await createSteward(props.gameSessionId);
-        props.stewards.push(steward);
-        setReload(reload + 1);
-    }
-
+const Stewards: FC<AllProps> = (props) => {
     return (
         <Fragment>
             {props.stewards.map((steward) => {
@@ -41,7 +34,7 @@ const Stewards: FC<PropsFromFiefManager> = (props) => {
                     />
                 )
             })}
-        <Button onClick={() => handleAddSteward()}>Lägg till</Button>
+        <Button onClick={() => props.handleAddSteward()}>Lägg till</Button>
         </Fragment>
     )
 }

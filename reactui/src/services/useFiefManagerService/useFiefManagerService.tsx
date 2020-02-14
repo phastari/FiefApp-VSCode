@@ -35,6 +35,8 @@ export const FiefManagerProvider: React.FC<PropsWithChildren<{}>> = (props) => {
       initializeLists(state.gameSessionId);
     } else if (state.status === FiefManagerStatuses.INITIALIZED && state.fiefId !== '') {
       loadFief(state.fiefId);
+    } else if (state.status === FiefManagerStatuses.LOADING && state.fiefId !== '') {
+      loadFief(state.fiefId);
     }
   }, [state])
 

@@ -1,6 +1,6 @@
 import React, { Fragment, ChangeEvent, useState } from 'react';
 import { IShortFief, IShortRoad, IShortInheritance } from '../../../services/useFiefManagerService/types';
-import { Col, Toast, ToastHeader, ToastBody, Form, FormGroup, Label, Input, Row } from 'reactstrap';
+import { Col, Toast, ToastHeader, ToastBody, Form, FormGroup, Label, Input, Row, Button } from 'reactstrap';
 import { tryParseInt } from '../../../common/utilities/tryParseInt';
 import { IFief } from '../../../common/models/fief';
 
@@ -11,7 +11,9 @@ interface PropsFromFiefManager {
     inheritancesList: IShortInheritance[];
 }
 
-const Information: React.FC<PropsFromFiefManager> = (props) => {
+type AllProps = PropsFromFiefManager & { handleAddFief: any, handleDeleteFief: any, handleSelectionChange: any };
+
+const Information: React.FC<AllProps> = (props) => {
     const [changed, setChanged] = useState(false);
     const [inheritanceDescription, setInheritanceDescription] = useState(props.fief.inheritance.description);
     const [animalHusbandryQ, setAnimalHusbandryQ] = useState(props.fief.animalHusbandryQuality);
@@ -26,10 +28,6 @@ const Information: React.FC<PropsFromFiefManager> = (props) => {
     const [militaryDL, setMilitaryDL] = useState(props.fief.militaryDevelopmentLevel);
     const [healthDL, setHealthDL] = useState(props.fief.healthcareDevelopmentLevel);
     const [seafaringDL, setSeafaringDL] = useState(props.fief.seafaringDevelopmentLevel);
-
-    const fiefSelectionChanged = (e: ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.value);
-    }
 
     const fiefTypeChanged = (e: ChangeEvent<HTMLInputElement>) => {
         props.inheritancesList.forEach(inheritance => {
@@ -221,13 +219,16 @@ const Information: React.FC<PropsFromFiefManager> = (props) => {
                                         type='select' 
                                         name='fiefInput' 
                                         id='fiefSelect' 
-                                        onChange={(e) => fiefSelectionChanged(e)}>
+                                        value={props.fief.fiefId}
+                                        onChange={(e) => props.handleSelectionChange(e.target.value)}>
                                     {props.fiefsList.map(fief => {
-                                        return <option key={fief.fiefId} value={fief.name}>{fief.name}</option>;
+                                        return <option key={fief.fiefId} value={fief.fiefId}>{fief.name}</option>;
                                     })}
                                     </Input>
                                 </Col>
                             </FormGroup>
+                            {props.fiefsList.length > 1 && <Button onClick={() => props.handleDeleteFief()}>Tabort förläning</Button>}
+                            <Button onClick={() => props.handleAddFief()}>Lägg till förläning</Button>
                             <FormGroup row>
                                 <Label 
                                     for='fiefType' 
@@ -259,7 +260,8 @@ const Information: React.FC<PropsFromFiefManager> = (props) => {
                                         type='textarea' 
                                         name='typeDescription' 
                                         id='fiefTypeDescription' 
-                                        value={inheritanceDescription} 
+                                        style={{height: '300px'}}
+                                        value={inheritanceDescription}
                                         disabled/>
                                 </Col>
                             </FormGroup>

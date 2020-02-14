@@ -16,7 +16,6 @@ export interface FiefManagerState {
     fiefId: string;
     gameSessionId: string;
     fief: IFief | null;
-    fiefs: IFief[];
     status: FiefManagerStatuses;
     errors: string;
     fiefsList: IShortFief[];
@@ -30,7 +29,6 @@ export const initialFiefManagerState: FiefManagerState = {
     fiefId: '',
     gameSessionId: '',
     fief: null,
-    fiefs: [],
     status: FiefManagerStatuses.INITIAL,
     errors: '',
     fiefsList: [],
@@ -66,7 +64,7 @@ export interface IInitializeFiefManager {
 }
 
 export type FiefManagerAction = 
-  | { type: FiefManagerActionTypes.FIEFMANAGER_LOAD_FIEF_REQUEST, id: string }
+  | { type: FiefManagerActionTypes.FIEFMANAGER_LOAD_FIEF_REQUEST }
   | { type: FiefManagerActionTypes.FIEFMANAGER_LOAD_FIEF_SUCCESS, fief: IFief }
   | { type: FiefManagerActionTypes.FIEFMANAGER_LOAD_FIEF_FAILURE, errors: string }
   | { type: FiefManagerActionTypes.FIEFMANAGER_INITIALIZE, id: string}
