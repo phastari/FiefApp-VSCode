@@ -1,0 +1,90 @@
+.list-selector-container {
+    position: relative;
+    display: flex;
+    width: 100%;
+    margin-bottom: 3px;
+    height: 27px;
+    font-family: 'Goudy Old Style';
+    & > span:first-child {
+        white-space: nowrap;
+        position: relative;
+        display: inline-block;
+        text-align: right;
+        font-family: inherit;
+        font-weight: bold;
+        flex: 1 1 auto;
+        padding: 2px 12px;
+        font-size: 14px;
+        line-height: 21px;
+        color: var(--group-color);
+    }
+    .click-area {
+        display: inherit;
+        z-index: 9;
+        .dropdown {
+            width: 180px;
+            text-align: center;
+            display: inline-block;
+            white-space: nowrap;
+            padding: 2px 0 0 0;
+            line-height: 21px;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: inherit;
+            -webkit-appearance: none;
+            color: var(--input-color);
+            z-index: 10;
+            flex: 1 1 auto;
+            margin-top: 0;
+            margin-bottom: 0;
+            border: 1px solid var(--input-border);
+            border-radius: 3px 3px 3px 3px;
+            background: var(--input-background);
+            transition: border .3s ease;
+            &:hover {
+                border: 1px solid var(--group-border-focus);
+            }
+            .icon {
+                float: right;
+                margin-left: -20px;
+                margin-top: 4px;
+                margin-right: 6px;
+            }
+            .dropdown-content {
+                z-index: 10;
+                & > ul {
+                    list-style-type: none;
+                    padding: 0 0 0 0;
+                    margin: 0 -1px 0 -1px;
+                    & > li:first-child {
+                        margin: 3px 0 0 0;
+                    }
+                    & > li:not(:first-child) {
+                        margin: 0 0 0 0;
+                    }
+                    & > li {
+                        & > p {
+                            text-align: center;
+                            text-decoration: none;
+                            padding: 2px 0 0 0;
+                            margin: 0 0 0 0;
+                            font-size: 14px;
+                            line-height: 21px;
+                            height: 27px;
+                            color: var(--group-color);
+                            background: var(--group-background);
+                            border: 1px solid var(--group-border);
+                            border-top: none;
+                            transition: background .3s ease, border .3s ease, color .3s ease;
+                            cursor: pointer;
+                        }
+                        & > p:hover {
+                            color: black;
+                            background: var(--group-background-focus);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

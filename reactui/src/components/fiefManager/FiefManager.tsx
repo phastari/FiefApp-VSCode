@@ -8,6 +8,7 @@ import useFiefManagerService from '../../services/useFiefManagerService/useFiefM
 import { FiefManagerStatuses, FiefManagerActionTypes } from '../../services/useFiefManagerService/types';
 import Loading from '../loading/Loading';
 import { createFief, createSteward, deleteFief } from './actions';
+import './fiefmanager.scss';
 
 const FiefManager: React.FC<RouteComponentProps> = (_: RouteComponentProps) => {
     const [index, setIndex] = useState(FiefManagerIndex.INFORMATION);
@@ -17,6 +18,10 @@ const FiefManager: React.FC<RouteComponentProps> = (_: RouteComponentProps) => {
     const handleSelectionChange = async (fiefId: string) => {
         service.state.fiefId = fiefId;
         service.dispatch({ type: FiefManagerActionTypes.FIEFMANAGER_LOAD_FIEF_REQUEST });
+    }
+
+    const handleInformationUpdate = async () => {
+        //updateInformation()
     }
 
     const handleAddFief = async () => {
@@ -65,7 +70,7 @@ const FiefManager: React.FC<RouteComponentProps> = (_: RouteComponentProps) => {
     }, [service, reload])
     
     return (
-        <Fragment>
+        <div className='fiefmanager-container'>
             {service.state.status !== FiefManagerStatuses.LOADED && <Loading />}
 
             {service.state.status === FiefManagerStatuses.LOADED && index === FiefManagerIndex.INFORMATION && service.state.fief !== null &&
@@ -91,7 +96,7 @@ const FiefManager: React.FC<RouteComponentProps> = (_: RouteComponentProps) => {
                     stewards={service.state.stewards}
                     industries={service.state.industries}/>
             </Fragment>}
-        </Fragment>
+        </div>
     )
 }
 

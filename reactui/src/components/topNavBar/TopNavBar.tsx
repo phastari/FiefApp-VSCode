@@ -2,9 +2,9 @@ import React, { Fragment, useState } from 'react';
 import { RouteComponentProps, Link } from '@reach/router';
 import useAuthenticationService from '../../services/useAuthenticationService/useAuthenticationService';
 import { Navbar, Nav, NavItem, Dropdown, DropdownToggle, DropdownMenu, Button } from 'reactstrap';
-import '../../index.css';
 import Login from '../login/Login';
 import { logout } from '../../services/useAuthenticationService/actions';
+import './top-navbar.scss';
 
 type Username = {
     name: string | null;
@@ -16,12 +16,14 @@ const TopNavBar: React.FC<RouteComponentProps> = (_) => {
     } = useAuthenticationService();
 
     return (
-        <Navbar color='light' light expand='md' className='navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3 vinque'>
-            <div className='container'>
-                <Link to='/' className='navbar-brand'>KUNG&ADEL</Link>
-                { isAuthenticated ? <LoggedInView name={username} /> : <LoggedOutView />}
-            </div>
-        </Navbar>
+        <div>
+            <Navbar color='light' light expand='md' className='navbar-expand-sm navbar-toggleable-sm border-bottom vinque'>
+                <div className='container no-margins'>
+                    <Link to='/' className='navbar-brand'>KUNG&ADEL</Link>
+                    { isAuthenticated ? <LoggedInView name={username} /> : <LoggedOutView />}
+                </div>
+            </Navbar>
+        </div>
     );
     
 }
@@ -51,7 +53,7 @@ const LoggedOutView = () => {
     return (
     <Fragment>
         <Nav navbar className='mr-auto'>
-            <NavItem>
+            <NavItem className='link'>
                 <Link to='/gamesessions'>Förlänings hanteraren</Link>
             </NavItem>
         </Nav>

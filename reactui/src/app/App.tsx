@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import './App.css';
+import './styles.scss';
 import GameSessions from '../components/gameSessions/gameSessions/GameSessions';
 import useAuthenticationService, { AuthenticationProvider } from '../services/useAuthenticationService/useAuthenticationService';
 import { getCurrentUser } from '../services/useAuthenticationService/actions';

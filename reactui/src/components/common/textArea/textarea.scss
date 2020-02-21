@@ -1,0 +1,36 @@
+.textarea-container {
+    width: 100%;
+    font-family: 'Goudy Old Style';
+    & > div:first-child {
+        height: 21px;
+        padding-top: 1px;
+        text-align: left;
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 21px;
+        color: var(--input-color);
+        font-family: inherit;
+        padding-left: 6px;
+    }
+    & > div:last-child {
+        width: 100%;
+        textarea {
+            width: 100%;
+            font-size: 14px;
+            line-height: 21px;
+            font-family: inherit;
+            text-align: left;
+            color: var(--input-color);
+            border: 1px solid var(--input-border);
+            transition: border .3s ease;
+            border-radius: 3px 3px 3px 3px;
+            padding: 3px 6px 0 6px;
+            background: var(--input-background);
+            overflow: hidden;
+            resize: none;
+            &:hover {
+                border: 1px solid var(--input-border-focus);
+            }
+        }
+    }
+}
